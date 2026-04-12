@@ -35,4 +35,22 @@ return [
         ],
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | EGI Internal API
+    |--------------------------------------------------------------------------
+    */
+    'egi' => [
+        'url' => env('EGI_API_URL', 'http://localhost:8000/api'),
+        'token' => env('EGI_API_TOKEN'),
+        'timeout' => 30,
+        'retry' => 2,
+    ],
+
+    'egi_credential' => [
+        'url' => env('EGI_CREDENTIAL_API_URL', 'http://localhost:3000/api'),
+        'token' => env('EGI_CREDENTIAL_API_TOKEN'),
+        'timeout' => 30,
+    ],
+
 ];
