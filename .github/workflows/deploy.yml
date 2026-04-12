@@ -1,0 +1,97 @@
+# @author Padmin D. Curtis (AI Partner OS3.0) for Fabio Cherici
+# @version 1.0.0 (FlorenceEGI — La Bottega)
+# @date 2026-04-12
+# @purpose Push-to-deploy La Bottega via GitHub Actions + AWS SSM
+
+name: Deploy La Bottega
+on:
+  push:
+    branches: [main]
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: deploy-la-bottega
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (change detection)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect changes
+        id: changes
+        run: |
+          CHANGED=$(git diff --name-only HEAD~1 HEAD 2>/dev/null || echo "FULL")
+          if [ "$CHANGED" = "FULL" ] || echo "$CHANGED" | grep -qE '\.(ts|tsx|css|js|jsx)$'; then
+            echo "frontend=true" >> $GITHUB_OUTPUT
+          else
+            echo "frontend=false" >> $GITHUB_OUTPUT
+          fi
+          if [ "$CHANGED" = "FULL" ] || echo "$CHANGED" | grep -qE '^python_ai_service/.*\.py$'; then
+            echo "python=true" >> $GITHUB_OUTPUT
+          else
+            echo "python=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Deploy via SSM
+        env:
+          FRONTEND: ${{ steps.changes.outputs.frontend }}
+          PYTHON: ${{ steps.changes.outputs.python }}
+        run: |
+          BASE="/home/forge/la-bottega.florenceegi.com"
+          SCRIPT="cd $BASE && git pull"
+          SCRIPT="$SCRIPT && cd laravel_backend && php artisan migrate --force && php artisan config:cache && php artisan view:clear"
+
+          if [ "$FRONTEND" = "true" ]; then
+            SCRIPT="$SCRIPT && npm run build"
+          fi
+
+          if [ "$PYTHON" = "true" ]; then
+            SCRIPT="$SCRIPT && cd $BASE && sudo supervisorctl restart bottega-fastapi"
+          fi
+
+          COMMAND_ID=$(aws ssm send-command \
+            --instance-ids "${{ secrets.EC2_INSTANCE_ID }}" \
+            --document-name "AWS-RunShellScript" \
+            --timeout-seconds 600 \
+            --parameters commands=["sudo -u forge bash -lc '${SCRIPT}'"] \
+            --query "Command.CommandId" --output text)
+
+          echo "SSM Command: $COMMAND_ID (frontend: $FRONTEND, python: $PYTHON)"
+
+          for i in $(seq 1 120); do
+            STATUS=$(aws ssm get-command-invocation \
+              --command-id "$COMMAND_ID" \
+              --instance-id "${{ secrets.EC2_INSTANCE_ID }}" \
+              --query "Status" --output text 2>/dev/null || echo "InProgress")
+
+            if [ "$STATUS" = "Success" ]; then
+              echo "Deploy OK"
+              aws ssm get-command-invocation --command-id "$COMMAND_ID" \
+                --instance-id "${{ secrets.EC2_INSTANCE_ID }}" \
+                --query "StandardOutputContent" --output text
+              exit 0
+            elif [ "$STATUS" = "Failed" ] || [ "$STATUS" = "Cancelled" ] || [ "$STATUS" = "TimedOut" ]; then
+              echo "FAILED: $STATUS"
+              aws ssm get-command-invocation --command-id "$COMMAND_ID" \
+                --instance-id "${{ secrets.EC2_INSTANCE_ID }}" \
+                --query "StandardErrorContent" --output text
+              exit 1
+            fi
+            sleep 5
+          done
+          echo "Timeout waiting for SSM"
+          exit 1
