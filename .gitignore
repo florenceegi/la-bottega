@@ -1,21 +1,34 @@
+# Dependencies
 /node_modules
-/vendor
-/.env
-/.env.backup
-/.env.production
-/storage/*.key
-/public/hot
-/public/storage
-/public/build
-Homestead.json
-Homestead.yaml
-auth.json
-npm-debug.log
-yarn-error.log
+laravel_backend/vendor
+laravel_backend/node_modules
+python_ai_service/__pycache__
+python_ai_service/.venv
+
+# Environment
+.env
+.env.backup
+.env.production
+.env.local
+
+# Laravel
+laravel_backend/storage/*.key
+laravel_backend/public/hot
+laravel_backend/public/storage
+laravel_backend/public/build
+laravel_backend/bootstrap/cache/*.php
+
+# IDE
 /.fleet
 /.idea
 /.vscode
+
+# OS
 *.swp
 *.swo
 .DS_Store
 Thumbs.db
+
+# Build
+npm-debug.log
+yarn-error.log
