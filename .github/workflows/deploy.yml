@@ -67,7 +67,7 @@ jobs:
             --instance-ids "${{ secrets.EC2_INSTANCE_ID }}" \
             --document-name "AWS-RunShellScript" \
             --timeout-seconds 600 \
-            --parameters commands=["sudo -u forge bash -lc '${SCRIPT}'"] \
+            --parameters "{\"commands\":[\"sudo -u forge bash -lc \\\"${SCRIPT}\\\"\"]}" \
             --query "Command.CommandId" --output text)
 
           echo "SSM Command: $COMMAND_ID (frontend: $FRONTEND, python: $PYTHON)"
