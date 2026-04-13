@@ -9,6 +9,7 @@
  */
 
 use App\Http\Controllers\MaestroController;
+use App\Http\Controllers\MicroscopioController;
 use App\Http\Controllers\PercorsoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +36,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/maestro/next-step', [MaestroController::class, 'nextStep']);
     Route::get('/maestro/profile-diagnostic', [MaestroController::class, 'profileDiagnostic']);
     Route::post('/maestro/onboarding', [MaestroController::class, 'onboarding']);
+
+    // --- Strumenti ---
+    Route::get('/tools/microscopio/run', [MicroscopioController::class, 'run']);
+    Route::get('/tools/microscopio/history', [MicroscopioController::class, 'history']);
 
     // --- Percorso ---
     Route::get('/percorso/status', [PercorsoController::class, 'status']);
