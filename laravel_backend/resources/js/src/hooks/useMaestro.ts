@@ -8,6 +8,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { bottegaApi, type ChatMessage, type MaestroHealth } from '@/api/bottegaApi';
+import { t } from '@/i18n/translations';
 
 interface MaestroState {
     messages: ChatMessage[];
@@ -57,7 +58,7 @@ export function useMaestro(): MaestroState {
         } catch {
             setMessages(prev => [...prev, {
                 role: 'assistant',
-                content: '⚠️ Non sono riuscito a rispondere. Riprova tra un momento.',
+                content: t('error.generic'),
                 timestamp: new Date().toISOString(),
             }]);
         } finally {

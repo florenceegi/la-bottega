@@ -84,7 +84,7 @@ export function ToolSidebar({ expanded, onToggle, maestroDown }: Props) {
                 <div className={`w-2 h-2 rounded-full ${maestroDown ? 'bg-amber-400' : 'bg-emerald-400'}`} />
                 {expanded && (
                     <span className={`text-[10px] uppercase tracking-wider ${maestroDown ? 'text-amber-400' : 'text-emerald-400/60'}`}>
-                        {maestroDown ? 'Offline' : 'Online'}
+                        {maestroDown ? t('maestro.status_offline') : t('maestro.status_online')}
                     </span>
                 )}
             </div>

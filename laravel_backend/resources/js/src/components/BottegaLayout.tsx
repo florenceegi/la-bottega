@@ -17,7 +17,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useMaestroHealth } from '@/hooks/useMaestroHealth';
 import { bottegaApi, type OnboardingResult } from '@/api/bottegaApi';
 import { useTranslation } from '@/hooks/useTranslation';
-import { type Locale } from '@/i18n';
+import { type Locale } from '@/i18n/translations';
 
 export function BottegaLayout() {
     const { t, locale, changeLocale } = useTranslation();
@@ -93,7 +93,7 @@ export function BottegaLayout() {
                             value={locale}
                             onChange={e => changeLocale(e.target.value as Locale)}
                             className="bg-transparent text-bottega-text-muted text-xs border border-white/10 rounded px-2 py-1 focus:outline-none focus:border-bottega-gold/30"
-                            aria-label="Language"
+                            aria-label={t('a11y.language_select')}
                         >
                             <option value="it">IT</option>
                             <option value="en">EN</option>

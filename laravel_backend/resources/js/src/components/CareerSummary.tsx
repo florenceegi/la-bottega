@@ -152,7 +152,7 @@ function CommunityPulse() {
     return (
         <div className="space-y-2.5">
             <h4 className="text-[10px] text-gray-600 uppercase tracking-widest">
-                Community
+                {t('community.title')}
             </h4>
             <p className="text-[11px] text-gray-500 leading-relaxed">
                 <span className="text-bottega-gold-light font-medium">{stats.artists_completed}</span>{' '}

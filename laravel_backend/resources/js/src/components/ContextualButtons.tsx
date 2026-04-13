@@ -61,6 +61,7 @@ function ContextButton({ button }: { button: ContextualButton }) {
         <button
             onClick={handleClick}
             className="inline-flex items-center gap-2 px-3.5 py-2 bg-bottega-gold/[0.06] border border-bottega-gold/20 rounded-lg text-bottega-gold text-xs tracking-wide hover:bg-bottega-gold/[0.12] hover:border-bottega-gold/40 transition-all duration-200"
+            aria-label={button.label}
         >
             <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d={iconPath} />

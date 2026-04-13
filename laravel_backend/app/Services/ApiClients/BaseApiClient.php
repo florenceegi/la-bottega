@@ -13,7 +13,8 @@ namespace App\Services\ApiClients;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
+use Ultra\UltraLogManager\UltraLogManager;
+use Ultra\ErrorManager\Interfaces\ErrorManagerInterface;
 
 abstract class BaseApiClient
 {
@@ -21,6 +22,8 @@ abstract class BaseApiClient
     protected string $token;
     protected int $timeout;
     protected int $retry;
+    protected UltraLogManager $logger;
+    protected ErrorManagerInterface $errorManager;
 
     public function __construct(string $baseUrl, string $token, int $timeout = 30, int $retry = 2)
     {
@@ -28,6 +31,8 @@ abstract class BaseApiClient
         $this->token = $token;
         $this->timeout = $timeout;
         $this->retry = $retry;
+        $this->logger = app(UltraLogManager::class);
+        $this->errorManager = app(ErrorManagerInterface::class);
     }
 
     protected function request(): PendingRequest
@@ -61,7 +66,7 @@ abstract class BaseApiClient
                 return $response->json();
             }
 
-            Log::warning('Bottega API call failed', [
+            $this->logger->warning('Bottega API call failed', [
                 'client' => static::class,
                 'method' => $method,
                 'path' => $path,
@@ -71,12 +76,15 @@ abstract class BaseApiClient
 
             return null;
         } catch (\Exception $e) {
-            Log::error('Bottega API call exception', [
-                'client' => static::class,
-                'method' => $method,
-                'path' => $path,
-                'error' => $e->getMessage(),
-            ]);
+            $this->errorManager->handle(
+                'BOTTEGA_API_EXCEPTION',
+                [
+                    'client' => static::class,
+                    'method' => $method,
+                    'path' => $path,
+                ],
+                $e
+            );
 
             return null;
         }

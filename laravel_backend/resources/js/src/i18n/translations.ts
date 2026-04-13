@@ -12,6 +12,10 @@ export const SUPPORTED_LOCALES: Locale[] = ['it', 'en', 'de', 'es', 'fr', 'pt'];
 
 const translations: Record<Locale, Record<string, string>> = {
     it: {
+        // App
+        'app.title': 'La Bottega',
+        'app.tagline': 'Il tuo Maestro di Bottega personale',
+
         // Auth & Layout
         'auth.login_required': 'Accedi per entrare nella Bottega',
         'auth.login_cta': 'Accedi con FlorenceEGI',
@@ -27,12 +31,19 @@ const translations: Record<Locale, Record<string, string>> = {
         'maestro.offline_hint': 'Puoi continuare a usare gli strumenti dalla barra laterale',
         'maestro.welcome': 'Benvenuto nella Bottega',
         'maestro.welcome_sub': 'Il tuo Maestro ti guiderà nel percorso artistico',
+        'maestro.welcome_subtitle': 'Il tuo Maestro ti aspetta',
+        'maestro.status_online': 'Online',
+        'maestro.status_offline': 'Offline',
+        'maestro.label': 'Maestro',
 
         // Onboarding
         'onboarding.title': 'Il Maestro ti sta osservando...',
         'onboarding.reading': 'Sta leggendo il tuo profilo',
         'onboarding.analyzing': 'Analizza le tue opere',
         'onboarding.preparing': 'Prepara la tua valutazione',
+        'onboarding.step1_title': 'Benvenuto nella Bottega',
+        'onboarding.step1_text': 'Ogni artista ha un percorso unico. Il Maestro ti aiuterà a trovare il tuo.',
+        'onboarding.complete': 'Il Maestro ti conosce. Iniziamo.',
 
         // Career Summary
         'career.title': 'Il tuo percorso',
@@ -41,6 +52,7 @@ const translations: Record<Locale, Record<string, string>> = {
         'career.sales': 'Vendite',
         'career.next_step': 'Prossimo passo',
         'career.no_step': 'Chiedi al Maestro',
+        'career.no_next_step': 'Chiedi al Maestro',
 
         // Percorso
         'percorso.phase': 'Fase',
@@ -51,6 +63,11 @@ const translations: Record<Locale, Record<string, string>> = {
         'percorso.zero': 'Percorso Zero',
         'percorso.crescita': 'Percorso Crescita',
         'percorso.mercato': 'Percorso Mercato',
+        'percorso.fase_identita': 'Identità',
+        'percorso.fase_presenza': 'Presenza Digitale',
+        'percorso.fase_vendita': 'Prima Vendita',
+        'percorso.fase_ritmo': 'Ritmo',
+        'percorso.step_completed': 'completati',
 
         // Tools
         'tools.title': 'Strumenti',
@@ -62,19 +79,32 @@ const translations: Record<Locale, Record<string, string>> = {
         'tools.coherence': 'Coherence Check',
         'tools.market_pulse': 'Market Pulse',
         'tools.visibility': 'Visibility Tracker',
+        'tools.locked_hint': 'Scopri questo strumento parlando col Maestro',
 
         // Community
         'community.title': 'Comunità',
         'community.artists_completed': 'artisti hanno completato il Percorso Zero questo mese',
         'community.works_certified': 'opere certificate con COA Sigillo questa settimana',
 
+        // Celebration
+        'celebration.step_complete': 'Passo completato!',
+        'celebration.fase_complete': 'Hai completato una fase!',
+        'celebration.percorso_complete': 'Percorso completato!',
+
         // Errors
         'error.generic': 'Qualcosa è andato storto',
         'error.retry': 'Riprova',
         'error.network': 'Errore di connessione',
+
+        // Accessibility
+        'a11y.loading': 'Caricamento in corso',
+        'a11y.language_select': 'Lingua',
     },
 
     en: {
+        'app.title': 'La Bottega',
+        'app.tagline': 'Your personal Master Craftsman',
+
         'auth.login_required': 'Sign in to enter La Bottega',
         'auth.login_cta': 'Sign in with FlorenceEGI',
         'auth.loading': 'Loading...',
@@ -88,11 +118,18 @@ const translations: Record<Locale, Record<string, string>> = {
         'maestro.offline_hint': 'You can continue using tools from the sidebar',
         'maestro.welcome': 'Welcome to La Bottega',
         'maestro.welcome_sub': 'Your Maestro will guide your artistic journey',
+        'maestro.welcome_subtitle': 'Your Maestro awaits',
+        'maestro.status_online': 'Online',
+        'maestro.status_offline': 'Offline',
+        'maestro.label': 'Maestro',
 
         'onboarding.title': 'The Maestro is observing you...',
         'onboarding.reading': 'Reading your profile',
         'onboarding.analyzing': 'Analyzing your works',
         'onboarding.preparing': 'Preparing your assessment',
+        'onboarding.step1_title': 'Welcome to La Bottega',
+        'onboarding.step1_text': 'Every artist has a unique path. The Maestro will help you find yours.',
+        'onboarding.complete': 'The Maestro knows you. Let\'s begin.',
 
         'career.title': 'Your journey',
         'career.completeness': 'Profile completeness',
@@ -100,6 +137,7 @@ const translations: Record<Locale, Record<string, string>> = {
         'career.sales': 'Sales',
         'career.next_step': 'Next step',
         'career.no_step': 'Ask the Maestro',
+        'career.no_next_step': 'Ask the Maestro',
 
         'percorso.phase': 'Phase',
         'percorso.identity': 'Identity',
@@ -109,6 +147,11 @@ const translations: Record<Locale, Record<string, string>> = {
         'percorso.zero': 'Path Zero',
         'percorso.crescita': 'Growth Path',
         'percorso.mercato': 'Market Path',
+        'percorso.fase_identita': 'Identity',
+        'percorso.fase_presenza': 'Digital Presence',
+        'percorso.fase_vendita': 'First Sale',
+        'percorso.fase_ritmo': 'Rhythm',
+        'percorso.step_completed': 'completed',
 
         'tools.title': 'Tools',
         'tools.microscopio': 'Microscope',
@@ -119,17 +162,28 @@ const translations: Record<Locale, Record<string, string>> = {
         'tools.coherence': 'Coherence Check',
         'tools.market_pulse': 'Market Pulse',
         'tools.visibility': 'Visibility Tracker',
+        'tools.locked_hint': 'Discover this tool by talking to the Maestro',
 
         'community.title': 'Community',
         'community.artists_completed': 'artists completed Path Zero this month',
         'community.works_certified': 'works certified with COA Sigillo this week',
 
+        'celebration.step_complete': 'Step completed!',
+        'celebration.fase_complete': 'You completed a phase!',
+        'celebration.percorso_complete': 'Path completed!',
+
         'error.generic': 'Something went wrong',
         'error.retry': 'Retry',
         'error.network': 'Connection error',
+
+        'a11y.loading': 'Loading',
+        'a11y.language_select': 'Language',
     },
 
     de: {
+        'app.title': 'La Bottega',
+        'app.tagline': 'Ihr persönlicher Meister der Werkstatt',
+
         'auth.login_required': 'Melden Sie sich an, um La Bottega zu betreten',
         'auth.login_cta': 'Mit FlorenceEGI anmelden',
         'auth.loading': 'Laden...',
@@ -143,11 +197,18 @@ const translations: Record<Locale, Record<string, string>> = {
         'maestro.offline_hint': 'Sie können die Werkzeuge in der Seitenleiste weiterhin nutzen',
         'maestro.welcome': 'Willkommen in La Bottega',
         'maestro.welcome_sub': 'Ihr Meister begleitet Ihren künstlerischen Weg',
+        'maestro.welcome_subtitle': 'Ihr Meister erwartet Sie',
+        'maestro.status_online': 'Online',
+        'maestro.status_offline': 'Offline',
+        'maestro.label': 'Meister',
 
         'onboarding.title': 'Der Meister beobachtet Sie...',
         'onboarding.reading': 'Liest Ihr Profil',
         'onboarding.analyzing': 'Analysiert Ihre Werke',
         'onboarding.preparing': 'Bereitet Ihre Bewertung vor',
+        'onboarding.step1_title': 'Willkommen in La Bottega',
+        'onboarding.step1_text': 'Jeder Künstler hat einen einzigartigen Weg. Der Meister hilft Ihnen, Ihren zu finden.',
+        'onboarding.complete': 'Der Meister kennt Sie. Lassen Sie uns beginnen.',
 
         'career.title': 'Ihr Weg',
         'career.completeness': 'Profilvollständigkeit',
@@ -155,6 +216,7 @@ const translations: Record<Locale, Record<string, string>> = {
         'career.sales': 'Verkäufe',
         'career.next_step': 'Nächster Schritt',
         'career.no_step': 'Fragen Sie den Meister',
+        'career.no_next_step': 'Fragen Sie den Meister',
 
         'percorso.phase': 'Phase',
         'percorso.identity': 'Identität',
@@ -164,6 +226,11 @@ const translations: Record<Locale, Record<string, string>> = {
         'percorso.zero': 'Pfad Null',
         'percorso.crescita': 'Wachstumspfad',
         'percorso.mercato': 'Marktpfad',
+        'percorso.fase_identita': 'Identität',
+        'percorso.fase_presenza': 'Digitale Präsenz',
+        'percorso.fase_vendita': 'Erster Verkauf',
+        'percorso.fase_ritmo': 'Rhythmus',
+        'percorso.step_completed': 'abgeschlossen',
 
         'tools.title': 'Werkzeuge',
         'tools.microscopio': 'Mikroskop',
@@ -174,17 +241,28 @@ const translations: Record<Locale, Record<string, string>> = {
         'tools.coherence': 'Kohärenzprüfung',
         'tools.market_pulse': 'Marktpuls',
         'tools.visibility': 'Sichtbarkeit',
+        'tools.locked_hint': 'Entdecken Sie dieses Werkzeug im Gespräch mit dem Meister',
 
         'community.title': 'Gemeinschaft',
         'community.artists_completed': 'Künstler haben diesen Monat den Pfad Null abgeschlossen',
         'community.works_certified': 'Werke diese Woche mit COA Sigillo zertifiziert',
 
+        'celebration.step_complete': 'Schritt abgeschlossen!',
+        'celebration.fase_complete': 'Sie haben eine Phase abgeschlossen!',
+        'celebration.percorso_complete': 'Pfad abgeschlossen!',
+
         'error.generic': 'Etwas ist schiefgelaufen',
         'error.retry': 'Erneut versuchen',
         'error.network': 'Verbindungsfehler',
+
+        'a11y.loading': 'Wird geladen',
+        'a11y.language_select': 'Sprache',
     },
 
     es: {
+        'app.title': 'La Bottega',
+        'app.tagline': 'Tu Maestro de Taller personal',
+
         'auth.login_required': 'Inicia sesión para entrar en La Bottega',
         'auth.login_cta': 'Iniciar sesión con FlorenceEGI',
         'auth.loading': 'Cargando...',
@@ -198,11 +276,18 @@ const translations: Record<Locale, Record<string, string>> = {
         'maestro.offline_hint': 'Puedes seguir usando las herramientas de la barra lateral',
         'maestro.welcome': 'Bienvenido a La Bottega',
         'maestro.welcome_sub': 'Tu Maestro te guiará en tu camino artístico',
+        'maestro.welcome_subtitle': 'Tu Maestro te espera',
+        'maestro.status_online': 'En línea',
+        'maestro.status_offline': 'Desconectado',
+        'maestro.label': 'Maestro',
 
         'onboarding.title': 'El Maestro te está observando...',
         'onboarding.reading': 'Leyendo tu perfil',
         'onboarding.analyzing': 'Analizando tus obras',
         'onboarding.preparing': 'Preparando tu evaluación',
+        'onboarding.step1_title': 'Bienvenido a La Bottega',
+        'onboarding.step1_text': 'Cada artista tiene un camino único. El Maestro te ayudará a encontrar el tuyo.',
+        'onboarding.complete': 'El Maestro te conoce. Comencemos.',
 
         'career.title': 'Tu camino',
         'career.completeness': 'Completitud del perfil',
@@ -210,6 +295,7 @@ const translations: Record<Locale, Record<string, string>> = {
         'career.sales': 'Ventas',
         'career.next_step': 'Próximo paso',
         'career.no_step': 'Pregunta al Maestro',
+        'career.no_next_step': 'Pregunta al Maestro',
 
         'percorso.phase': 'Fase',
         'percorso.identity': 'Identidad',
@@ -219,6 +305,11 @@ const translations: Record<Locale, Record<string, string>> = {
         'percorso.zero': 'Camino Cero',
         'percorso.crescita': 'Camino de Crecimiento',
         'percorso.mercato': 'Camino de Mercado',
+        'percorso.fase_identita': 'Identidad',
+        'percorso.fase_presenza': 'Presencia Digital',
+        'percorso.fase_vendita': 'Primera Venta',
+        'percorso.fase_ritmo': 'Ritmo',
+        'percorso.step_completed': 'completados',
 
         'tools.title': 'Herramientas',
         'tools.microscopio': 'Microscopio',
@@ -229,17 +320,28 @@ const translations: Record<Locale, Record<string, string>> = {
         'tools.coherence': 'Control de Coherencia',
         'tools.market_pulse': 'Pulso del Mercado',
         'tools.visibility': 'Rastreo de Visibilidad',
+        'tools.locked_hint': 'Descubre esta herramienta hablando con el Maestro',
 
         'community.title': 'Comunidad',
         'community.artists_completed': 'artistas completaron el Camino Cero este mes',
         'community.works_certified': 'obras certificadas con COA Sigillo esta semana',
 
+        'celebration.step_complete': '¡Paso completado!',
+        'celebration.fase_complete': '¡Has completado una fase!',
+        'celebration.percorso_complete': '¡Camino completado!',
+
         'error.generic': 'Algo salió mal',
         'error.retry': 'Reintentar',
         'error.network': 'Error de conexión',
+
+        'a11y.loading': 'Cargando',
+        'a11y.language_select': 'Idioma',
     },
 
     fr: {
+        'app.title': 'La Bottega',
+        'app.tagline': 'Votre Maître d\'Atelier personnel',
+
         'auth.login_required': 'Connectez-vous pour entrer dans La Bottega',
         'auth.login_cta': 'Se connecter avec FlorenceEGI',
         'auth.loading': 'Chargement...',
@@ -253,11 +355,18 @@ const translations: Record<Locale, Record<string, string>> = {
         'maestro.offline_hint': 'Vous pouvez continuer à utiliser les outils dans la barre latérale',
         'maestro.welcome': 'Bienvenue à La Bottega',
         'maestro.welcome_sub': 'Votre Maître guidera votre parcours artistique',
+        'maestro.welcome_subtitle': 'Votre Maître vous attend',
+        'maestro.status_online': 'En ligne',
+        'maestro.status_offline': 'Hors ligne',
+        'maestro.label': 'Maître',
 
         'onboarding.title': 'Le Maître vous observe...',
         'onboarding.reading': 'Lecture de votre profil',
         'onboarding.analyzing': 'Analyse de vos œuvres',
         'onboarding.preparing': 'Préparation de votre évaluation',
+        'onboarding.step1_title': 'Bienvenue à La Bottega',
+        'onboarding.step1_text': 'Chaque artiste a un parcours unique. Le Maître vous aidera à trouver le vôtre.',
+        'onboarding.complete': 'Le Maître vous connaît. Commençons.',
 
         'career.title': 'Votre parcours',
         'career.completeness': 'Complétude du profil',
@@ -265,6 +374,7 @@ const translations: Record<Locale, Record<string, string>> = {
         'career.sales': 'Ventes',
         'career.next_step': 'Prochaine étape',
         'career.no_step': 'Demandez au Maître',
+        'career.no_next_step': 'Demandez au Maître',
 
         'percorso.phase': 'Phase',
         'percorso.identity': 'Identité',
@@ -274,6 +384,11 @@ const translations: Record<Locale, Record<string, string>> = {
         'percorso.zero': 'Parcours Zéro',
         'percorso.crescita': 'Parcours Croissance',
         'percorso.mercato': 'Parcours Marché',
+        'percorso.fase_identita': 'Identité',
+        'percorso.fase_presenza': 'Présence Numérique',
+        'percorso.fase_vendita': 'Première Vente',
+        'percorso.fase_ritmo': 'Rythme',
+        'percorso.step_completed': 'complétés',
 
         'tools.title': 'Outils',
         'tools.microscopio': 'Microscope',
@@ -284,17 +399,28 @@ const translations: Record<Locale, Record<string, string>> = {
         'tools.coherence': 'Contrôle de Cohérence',
         'tools.market_pulse': 'Pouls du Marché',
         'tools.visibility': 'Suivi de Visibilité',
+        'tools.locked_hint': 'Découvrez cet outil en parlant au Maître',
 
         'community.title': 'Communauté',
         'community.artists_completed': 'artistes ont complété le Parcours Zéro ce mois',
         'community.works_certified': 'œuvres certifiées avec COA Sigillo cette semaine',
 
+        'celebration.step_complete': 'Étape complétée !',
+        'celebration.fase_complete': 'Vous avez complété une phase !',
+        'celebration.percorso_complete': 'Parcours complété !',
+
         'error.generic': 'Quelque chose s\'est mal passé',
         'error.retry': 'Réessayer',
         'error.network': 'Erreur de connexion',
+
+        'a11y.loading': 'Chargement en cours',
+        'a11y.language_select': 'Langue',
     },
 
     pt: {
+        'app.title': 'La Bottega',
+        'app.tagline': 'O seu Mestre de Oficina pessoal',
+
         'auth.login_required': 'Faça login para entrar na Bottega',
         'auth.login_cta': 'Entrar com FlorenceEGI',
         'auth.loading': 'Carregando...',
@@ -308,11 +434,18 @@ const translations: Record<Locale, Record<string, string>> = {
         'maestro.offline_hint': 'Pode continuar a usar as ferramentas na barra lateral',
         'maestro.welcome': 'Bem-vindo à La Bottega',
         'maestro.welcome_sub': 'O seu Mestre guiará a sua jornada artística',
+        'maestro.welcome_subtitle': 'O seu Mestre espera-o',
+        'maestro.status_online': 'Online',
+        'maestro.status_offline': 'Offline',
+        'maestro.label': 'Mestre',
 
         'onboarding.title': 'O Mestre está observando-o...',
         'onboarding.reading': 'Lendo o seu perfil',
         'onboarding.analyzing': 'Analisando as suas obras',
         'onboarding.preparing': 'Preparando a sua avaliação',
+        'onboarding.step1_title': 'Bem-vindo à La Bottega',
+        'onboarding.step1_text': 'Cada artista tem um percurso único. O Mestre ajudará a encontrar o seu.',
+        'onboarding.complete': 'O Mestre conhece-o. Vamos começar.',
 
         'career.title': 'O seu percurso',
         'career.completeness': 'Completude do perfil',
@@ -320,6 +453,7 @@ const translations: Record<Locale, Record<string, string>> = {
         'career.sales': 'Vendas',
         'career.next_step': 'Próximo passo',
         'career.no_step': 'Pergunte ao Mestre',
+        'career.no_next_step': 'Pergunte ao Mestre',
 
         'percorso.phase': 'Fase',
         'percorso.identity': 'Identidade',
@@ -329,6 +463,11 @@ const translations: Record<Locale, Record<string, string>> = {
         'percorso.zero': 'Percurso Zero',
         'percorso.crescita': 'Percurso Crescimento',
         'percorso.mercato': 'Percurso Mercado',
+        'percorso.fase_identita': 'Identidade',
+        'percorso.fase_presenza': 'Presença Digital',
+        'percorso.fase_vendita': 'Primeira Venda',
+        'percorso.fase_ritmo': 'Ritmo',
+        'percorso.step_completed': 'completados',
 
         'tools.title': 'Ferramentas',
         'tools.microscopio': 'Microscópio',
@@ -339,14 +478,22 @@ const translations: Record<Locale, Record<string, string>> = {
         'tools.coherence': 'Verificação de Coerência',
         'tools.market_pulse': 'Pulso do Mercado',
         'tools.visibility': 'Rastreamento de Visibilidade',
+        'tools.locked_hint': 'Descubra esta ferramenta falando com o Mestre',
 
         'community.title': 'Comunidade',
         'community.artists_completed': 'artistas completaram o Percurso Zero este mês',
         'community.works_certified': 'obras certificadas com COA Sigillo esta semana',
 
+        'celebration.step_complete': 'Passo completado!',
+        'celebration.fase_complete': 'Completou uma fase!',
+        'celebration.percorso_complete': 'Percurso completado!',
+
         'error.generic': 'Algo correu mal',
         'error.retry': 'Tentar novamente',
         'error.network': 'Erro de conexão',
+
+        'a11y.loading': 'A carregar',
+        'a11y.language_select': 'Idioma',
     },
 };
 

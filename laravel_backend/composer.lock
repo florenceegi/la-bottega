@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d129e334a5fe8973812884ac379c35cd",
+    "content-hash": "d1fb3a7a12510c6678a0062f92345205",
     "packages": [
         {
             "name": "brick/math",
@@ -5999,6 +5999,176 @@
             "time": "2025-12-02T11:56:42+00:00"
         },
         {
+            "name": "ultra/ultra-error-manager",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:AutobookNft/UltraErrorManager.git",
+                "reference": "6ff8472710034890540fa0b510102e819dee50cc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AutobookNft/UltraErrorManager/zipball/6ff8472710034890540fa0b510102e819dee50cc",
+                "reference": "6ff8472710034890540fa0b510102e819dee50cc",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^11.0 || ^12.0",
+                "php": "^8.1|^8.2|^8.3",
+                "psr/log": "^3.0",
+                "ultra/ultra-log-manager": "dev-main",
+                "ultra/ultra-translation-manager": "dev-main"
+            },
+            "require-dev": {
+                "doctrine/dbal": "^3.0",
+                "fakerphp/faker": "^1.23",
+                "laravel/framework": "^11.0",
+                "mockery/mockery": "^1.6",
+                "orchestra/testbench": "^9.12",
+                "phpstan/phpstan": "^1.10",
+                "squizlabs/php_codesniffer": "^3.7"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Ultra\\ErrorManager\\Providers\\UltraErrorManagerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ultra\\ErrorManager\\": "src/"
+                },
+                "files": [
+                    "src/Helpers/helpers.php"
+                ]
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Ultra\\ErrorManager\\Tests\\": "tests/"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "vendor/bin/phpunit"
+                ],
+                "analyse": [
+                    "vendor/bin/phpstan analyse"
+                ],
+                "format": [
+                    "vendor/bin/phpcs --standard=PSR12 src tests"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabio Cherici",
+                    "email": "fabiocherici@gmail.com"
+                }
+            ],
+            "description": "Advanced, injectable error management library for the Ultra ecosystem",
+            "time": "2026-03-10T11:55:22+00:00"
+        },
+        {
+            "name": "ultra/ultra-log-manager",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:AutobookNft/UltraLogManager.git",
+                "reference": "02ebd3a18635c7f9c52805fa18b16aae22183001"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AutobookNft/UltraLogManager/zipball/02ebd3a18635c7f9c52805fa18b16aae22183001",
+                "reference": "02ebd3a18635c7f9c52805fa18b16aae22183001",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^11.0 || ^12.0",
+                "monolog/monolog": "^3.0",
+                "php": "^8.1|^8.2|^8.3"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Ultra\\UltraLogManager\\Providers\\UltraLogManagerServiceProvider"
+                    ],
+                    "aliases": {
+                        "UltraLog": "Ultra\\UltraLogManager\\Facades\\UltraLog"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ultra\\UltraLogManager\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabio Cherici",
+                    "email": "fabiocherici@gmail.com"
+                }
+            ],
+            "description": "Ultra Log Manager is a library to standardize error and info logging for all Fabio's projects.",
+            "time": "2025-07-05T09:48:39+00:00"
+        },
+        {
+            "name": "ultra/ultra-translation-manager",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:AutobookNft/UltraTranslationManager.git",
+                "reference": "909e442be4c499f39f05f8a245a963302595e339"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AutobookNft/UltraTranslationManager/zipball/909e442be4c499f39f05f8a245a963302595e339",
+                "reference": "909e442be4c499f39f05f8a245a963302595e339",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^11.0 || ^12.0",
+                "php": "^8.1|^8.2|^8.3"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Ultra\\TranslationManager\\Providers\\UltraTranslationServiceProvider"
+                    ],
+                    "aliases": {
+                        "UltraTrans": "Ultra\\TranslationManager\\Facades\\UltraTrans"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ultra\\TranslationManager\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabio Cherici",
+                    "email": "fabiocherici@gmail.com"
+                }
+            ],
+            "description": "Ultra Translation Manager for managing translations in the Ultra ecosystem",
+            "time": "2025-07-10T16:09:54+00:00"
+        },
+        {
             "name": "vlucas/phpdotenv",
             "version": "v5.6.3",
             "source": {
@@ -8395,8 +8565,12 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
-    "stability-flags": [],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "ultra/ultra-error-manager": 20,
+        "ultra/ultra-log-manager": 20,
+        "ultra/ultra-translation-manager": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

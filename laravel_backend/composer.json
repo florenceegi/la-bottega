@@ -10,7 +10,10 @@
         "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.10",
-        "spatie/laravel-permission": "^6.0"
+        "spatie/laravel-permission": "^6.0",
+        "ultra/ultra-error-manager": "dev-main",
+        "ultra/ultra-log-manager": "dev-main",
+        "ultra/ultra-translation-manager": "dev-main"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -85,6 +88,11 @@
             "php": "8.3.30"
         }
     },
-    "minimum-stability": "stable",
+    "repositories": [
+        { "type": "vcs", "url": "https://github.com/AutobookNft/UltraErrorManager.git" },
+        { "type": "vcs", "url": "https://github.com/AutobookNft/UltraTranslationManager.git" },
+        { "type": "vcs", "url": "https://github.com/AutobookNft/UltraLogManager.git" }
+    ],
+    "minimum-stability": "dev",
     "prefer-stable": true
 }

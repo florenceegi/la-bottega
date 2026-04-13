@@ -146,6 +146,7 @@ export function MaestroChat({ user, maestroDown, onboardingResult }: Props) {
 }
 
 function MessageBubble({ message }: { message: ChatMessage }) {
+    const { t } = useTranslation();
     const isUser = message.role === 'user';
 
     return (
@@ -156,7 +157,7 @@ function MessageBubble({ message }: { message: ChatMessage }) {
                         <div className="w-5 h-5 rounded-full border border-bottega-gold/30 flex items-center justify-center">
                             <div className="w-2 h-2 rounded-full bg-bottega-gold/60" />
                         </div>
-                        <span className="text-[10px] text-bottega-gold/40 uppercase tracking-widest">Maestro</span>
+                        <span className="text-[10px] text-bottega-gold/40 uppercase tracking-widest">{t('maestro.label')}</span>
                     </div>
                 )}
                 <div className={`rounded-2xl px-4 py-3 text-sm leading-relaxed ${
