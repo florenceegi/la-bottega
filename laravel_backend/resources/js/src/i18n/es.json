@@ -1,0 +1,61 @@
+{
+  "app.title": "La Bottega",
+  "app.tagline": "Tu Maestro de Bottega personal",
+
+  "auth.login_required": "Inicia sesion en FlorenceEGI para entrar en la Bottega",
+  "auth.login_cta": "Iniciar sesion",
+  "auth.loading": "Cargando...",
+
+  "maestro.welcome": "Bienvenido a la Bottega",
+  "maestro.welcome_subtitle": "Tu Maestro te espera",
+  "maestro.placeholder": "Escribe un mensaje al Maestro...",
+  "maestro.send": "Enviar",
+  "maestro.thinking": "El Maestro esta reflexionando...",
+  "maestro.offline": "El Maestro esta temporalmente ausente",
+  "maestro.offline_hint": "Puedes seguir usando las herramientas desde la barra lateral",
+  "maestro.onboarding_title": "El Maestro te esta conociendo",
+  "maestro.onboarding_reading": "Leyendo tu perfil...",
+
+  "career.title": "Tu camino",
+  "career.completeness": "Completitud del perfil",
+  "career.works": "Obras",
+  "career.sales": "Ventas",
+  "career.next_step": "Proximo paso",
+  "career.no_next_step": "Pregunta al Maestro",
+
+  "percorso.fase": "Fase",
+  "percorso.fase_identita": "Identidad",
+  "percorso.fase_presenza": "Presencia Digital",
+  "percorso.fase_vendita": "Primera Venta",
+  "percorso.fase_ritmo": "Ritmo",
+  "percorso.zero": "Camino Zero",
+  "percorso.crescita": "Camino Crecimiento",
+  "percorso.mercato": "Camino Mercado",
+  "percorso.step_completed": "completados",
+
+  "tools.title": "Herramientas",
+  "tools.microscopio": "Microscopio",
+  "tools.sestante": "Sextante",
+  "tools.price_advisor": "Precios",
+  "tools.cantiere": "Taller Bio",
+  "tools.binocolo": "Binoculares",
+  "tools.coherence": "Coherencia",
+  "tools.market_pulse": "Pulso de Mercado",
+  "tools.visibility": "Visibilidad",
+  "tools.locked_hint": "Descubre esta herramienta hablando con el Maestro",
+
+  "onboarding.step1_title": "Bienvenido a la Bottega",
+  "onboarding.step1_text": "Cada artista tiene un camino unico. El Maestro te ayudara a encontrar el tuyo.",
+  "onboarding.analyzing": "Analizando tu perfil artistico...",
+  "onboarding.complete": "El Maestro te conoce. Comencemos.",
+
+  "celebration.step_complete": "Paso completado!",
+  "celebration.fase_complete": "Has completado una fase!",
+  "celebration.percorso_complete": "Camino completado!",
+
+  "community.artists_completed": "artistas completaron el Camino Zero este mes",
+  "community.works_certified": "obras certificadas con COA Sigillo esta semana",
+
+  "error.generic": "Algo salio mal. Intentalo de nuevo.",
+  "error.network": "Conexion perdida. Verificando..."
+}

@@ -1,0 +1,61 @@
+{
+  "app.title": "La Bottega",
+  "app.tagline": "O seu Mestre de Bottega pessoal",
+
+  "auth.login_required": "Entre no FlorenceEGI para acessar a Bottega",
+  "auth.login_cta": "Entrar",
+  "auth.loading": "Carregando...",
+
+  "maestro.welcome": "Bem-vindo a Bottega",
+  "maestro.welcome_subtitle": "O seu Mestre o espera",
+  "maestro.placeholder": "Escreva uma mensagem ao Mestre...",
+  "maestro.send": "Enviar",
+  "maestro.thinking": "O Mestre esta refletindo...",
+  "maestro.offline": "O Mestre esta temporariamente ausente",
+  "maestro.offline_hint": "Voce pode continuar usando as ferramentas na barra lateral",
+  "maestro.onboarding_title": "O Mestre esta te conhecendo",
+  "maestro.onboarding_reading": "Lendo seu perfil...",
+
+  "career.title": "Sua jornada",
+  "career.completeness": "Completude do perfil",
+  "career.works": "Obras",
+  "career.sales": "Vendas",
+  "career.next_step": "Proximo passo",
+  "career.no_next_step": "Pergunte ao Mestre",
+
+  "percorso.fase": "Fase",
+  "percorso.fase_identita": "Identidade",
+  "percorso.fase_presenza": "Presenca Digital",
+  "percorso.fase_vendita": "Primeira Venda",
+  "percorso.fase_ritmo": "Ritmo",
+  "percorso.zero": "Caminho Zero",
+  "percorso.crescita": "Caminho Crescimento",
+  "percorso.mercato": "Caminho Mercado",
+  "percorso.step_completed": "concluidos",
+
+  "tools.title": "Ferramentas",
+  "tools.microscopio": "Microscopio",
+  "tools.sestante": "Sextante",
+  "tools.price_advisor": "Precos",
+  "tools.cantiere": "Oficina Bio",
+  "tools.binocolo": "Binoculos",
+  "tools.coherence": "Coerencia",
+  "tools.market_pulse": "Pulso do Mercado",
+  "tools.visibility": "Visibilidade",
+  "tools.locked_hint": "Descubra esta ferramenta falando com o Mestre",
+
+  "onboarding.step1_title": "Bem-vindo a Bottega",
+  "onboarding.step1_text": "Cada artista tem um caminho unico. O Mestre ajudara voce a encontrar o seu.",
+  "onboarding.analyzing": "Analisando seu perfil artistico...",
+  "onboarding.complete": "O Mestre te conhece. Vamos comecar.",
+
+  "celebration.step_complete": "Passo concluido!",
+  "celebration.fase_complete": "Voce completou uma fase!",
+  "celebration.percorso_complete": "Caminho concluido!",
+
+  "community.artists_completed": "artistas completaram o Caminho Zero este mes",
+  "community.works_certified": "obras certificadas com COA Sigillo esta semana",
+
+  "error.generic": "Algo deu errado. Tente novamente.",
+  "error.network": "Conexao perdida. Verificando..."
+}

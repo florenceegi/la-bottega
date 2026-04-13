@@ -8,6 +8,129 @@
     --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
     --color-bottega-navy: #1B2A4A;
+    --color-bottega-navy-light: #243658;
+    --color-bottega-navy-dark: #111D33;
     --color-bottega-gold: #D4AF37;
     --color-bottega-gold-light: #E5C76B;
+    --color-bottega-gold-dim: rgba(212, 175, 55, 0.15);
+    --color-bottega-surface: #1E3050;
+    --color-bottega-text: #E8E4DD;
+    --color-bottega-text-muted: #8B95A8;
+}
+
+/* Scrollbar sottile gold-themed */
+@layer base {
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: var(--color-bottega-gold-dim) transparent;
+    }
+}
+
+/* Glow oro per focus e hover states */
+@layer utilities {
+    .glow-gold {
+        box-shadow: 0 0 20px rgba(212, 175, 55, 0.2), 0 0 40px rgba(212, 175, 55, 0.1);
+    }
+    .glow-gold-subtle {
+        box-shadow: 0 0 12px rgba(212, 175, 55, 0.08);
+    }
+}
+
+/* Animazione typing del Maestro */
+@keyframes maestro-pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+.maestro-typing-dot {
+    animation: maestro-pulse 1.4s ease-in-out infinite;
+}
+.maestro-typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.maestro-typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+/* Animazione entrata onboarding */
+@keyframes bottega-fade-up {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up {
+    animation: bottega-fade-up 0.6s ease-out forwards;
+}
+
+/* Animazione celebrazione step completato */
+@keyframes bottega-celebrate {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+.animate-celebrate {
+    animation: bottega-celebrate 0.5s ease-out;
+}
+
+/* Particelle oro per celebrazioni (GAP 3c) */
+@keyframes gold-particle {
+    0% { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(-60px) scale(0); }
+}
+.animate-gold-particle {
+    animation: gold-particle 1s ease-out forwards;
+}
+
+/* Staggered fade-in for list items */
+@keyframes bottega-stagger-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animate-stagger > * {
+    opacity: 0;
+    animation: bottega-stagger-in 0.4s ease-out both;
+}
+.animate-stagger > *:nth-child(1) { animation-delay: 0.05s; }
+.animate-stagger > *:nth-child(2) { animation-delay: 0.1s; }
+.animate-stagger > *:nth-child(3) { animation-delay: 0.15s; }
+.animate-stagger > *:nth-child(4) { animation-delay: 0.2s; }
+.animate-stagger > *:nth-child(5) { animation-delay: 0.25s; }
+
+/* Shimmer loading effect */
+@keyframes bottega-shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+.bottega-shimmer {
+    background: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.08) 50%, transparent 100%);
+    background-size: 200% 100%;
+    animation: bottega-shimmer 2s ease-in-out infinite;
+}
+
+/* Scrollbar styled for chat area */
+.bottega-scrollbar::-webkit-scrollbar { width: 4px; }
+.bottega-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.bottega-scrollbar::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.15); border-radius: 2px; }
+.bottega-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(212, 175, 55, 0.3); }
+
+/* Onboarding text reveal */
+@keyframes bottega-text-reveal {
+    from { max-height: 0; opacity: 0; }
+    to { max-height: 200px; opacity: 1; }
+}
+.animate-text-reveal {
+    overflow: hidden;
+    animation: bottega-text-reveal 1.2s ease-out both;
+}
+
+/* Scale in for modals/overlays */
+@keyframes bottega-scale-in {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+}
+.animate-scale-in {
+    animation: bottega-scale-in 0.3s ease-out both;
+}
+
+/* Pulse gold ring for WOW moments */
+@keyframes bottega-pulse-gold {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.3); }
+    50% { box-shadow: 0 0 0 8px rgba(212, 175, 55, 0); }
+}
+.animate-pulse-gold {
+    animation: bottega-pulse-gold 2s ease-in-out infinite;
 }
