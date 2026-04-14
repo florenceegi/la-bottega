@@ -14,6 +14,7 @@ interface Props {
     expanded: boolean;
     onToggle: () => void;
     maestroDown: boolean;
+    onToolOpen?: (toolName: string) => void;
 }
 
 const TOOL_META: Record<string, { icon: string; key: string }> = {
@@ -51,7 +52,7 @@ const TOOL_META: Record<string, { icon: string; key: string }> = {
     },
 };
 
-export function ToolSidebar({ expanded, onToggle, maestroDown }: Props) {
+export function ToolSidebar({ expanded, onToggle, maestroDown, onToolOpen }: Props) {
     const { t } = useTranslation();
     const [tools, setTools] = useState<ToolExecution[]>([]);
 
@@ -105,6 +106,7 @@ export function ToolSidebar({ expanded, onToggle, maestroDown }: Props) {
                                 icon={meta.icon}
                                 label={t(meta.key)}
                                 expanded={expanded}
+                                onOpen={onToolOpen}
                             />
                         );
                     })}
@@ -128,12 +130,12 @@ export function ToolSidebar({ expanded, onToggle, maestroDown }: Props) {
     );
 }
 
-function ToolButton({ name, icon, label, expanded }: {
-    name: string; icon: string; label: string; expanded: boolean;
+function ToolButton({ name, icon, label, expanded, onOpen }: {
+    name: string; icon: string; label: string; expanded: boolean; onOpen?: (name: string) => void;
 }) {
     return (
         <button
-            onClick={() => console.info(`[Bottega] Open tool: ${name}`)}
+            onClick={() => onOpen?.(name)}
             title={expanded ? undefined : label}
             className={`group flex items-center gap-2.5 rounded-lg text-gray-500 hover:text-bottega-gold hover:bg-bottega-gold/[0.06] transition-all duration-200 ${
                 expanded ? 'w-full px-3 py-2' : 'w-10 h-10 justify-center'

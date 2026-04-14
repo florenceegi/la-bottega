@@ -130,6 +130,44 @@ export interface ToolExecution {
     last_used_at: string;
 }
 
+export interface MicroscopioReport {
+    total_score: number;
+    scores: {
+        identity: number;
+        completeness: number;
+        coherence: number;
+        visibility: number;
+    };
+    findings: Array<{
+        priority: 'critical' | 'high' | 'medium' | 'low';
+        category: string;
+        message: string;
+        action?: string;
+        affected_egis?: string[];
+    }>;
+    findings_count: number;
+    traits_coherence: number;
+    weak_descriptions_count: number;
+    recommendations: Array<{
+        priority: string;
+        category: string;
+        message: string;
+        action_url?: string;
+        action_label?: string;
+    }>;
+    analyzed_at: string;
+}
+
+export interface MicroscopioFixResult {
+    fixed?: number;
+    message?: string;
+    error?: string;
+    npe_result?: unknown;
+    pricing_result?: unknown;
+    coherence?: unknown;
+    split_suggestion?: unknown;
+}
+
 // --- API Methods ---
 
 export const bottegaApi = {
@@ -166,4 +204,30 @@ export const bottegaApi = {
 
     // Tools (GAP 1 — sidebar strumenti usati)
     toolsUnlocked: () => request<ToolExecution[]>('/tools/unlocked').catch(() => []),
+
+    // Microscopio
+    microscopioRun: () => request<{ data: MicroscopioReport }>('/tools/microscopio/run'),
+
+    microscopioHistory: (limit = 10) =>
+        request<{ data: Array<{ id: number; total_score: number; scores: Record<string, number>; findings_count: number; analyzed_at: string }> }>(
+            `/tools/microscopio/history?limit=${limit}`,
+        ),
+
+    microscopioFixDescriptions: (language = 'it') =>
+        request<{ data: MicroscopioFixResult }>('/tools/microscopio/fix/descriptions', {
+            method: 'POST',
+            body: JSON.stringify({ language }),
+        }),
+
+    microscopioFixPricing: (egiId: number) =>
+        request<{ data: MicroscopioFixResult }>('/tools/microscopio/fix/pricing', {
+            method: 'POST',
+            body: JSON.stringify({ egi_id: egiId }),
+        }),
+
+    microscopioFixCoherence: (collectionId: number) =>
+        request<{ data: MicroscopioFixResult }>('/tools/microscopio/fix/coherence', {
+            method: 'POST',
+            body: JSON.stringify({ collection_id: collectionId }),
+        }),
 };
