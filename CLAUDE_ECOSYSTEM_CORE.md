@@ -51,6 +51,15 @@
                       URL: la-bottega.florenceegi.com | Path: /home/fabio/LA-BOTTEGA/
                       Status: IN PROGETTAZIONE (M-050)
 
+  CREATOR-STAGING   → Configuratore sito creator + template madre. Il creator autenticato
+                      sceglie template (6), animazione (6), scena 3D (10), subdomain e
+                      commissiona FlorenceEGI SRL (web agency) per la costruzione del sito.
+                      Ogni sito produzione è un fork del template madre (personalizzabile).
+                      Next.js 15 App Router, consuma API EGI pubblica. Auth: Sanctum cookie.
+                      URL: creator-staging.florenceegi.com | Path: /home/fabio/CREATOR-STAGING/
+                      Status: IN SVILUPPO (M-051)
+
+
 ━━━ STRUMENTI INTERNI ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   EGI-STAT          → Dashboard produttività sviluppatori (GitHub metrics, commit analysis).
                       Path: /home/fabio/EGI-STAT/
