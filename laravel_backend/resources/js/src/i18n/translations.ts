@@ -99,6 +99,11 @@ const translations: Record<Locale, Record<string, string>> = {
         // Accessibility
         'a11y.loading': 'Caricamento in corso',
         'a11y.language_select': 'Lingua',
+
+        // Coming Soon
+        'coming_soon.title': 'Coming Soon',
+        'coming_soon.description': 'Strumenti oggettivi per lo sviluppo dell\'artista come brand e valutazione informata per il collezionista.',
+        'coming_soon.ecosystem_label': 'Un organo dell\'ecosistema',
     },
 
     en: {
@@ -178,6 +183,11 @@ const translations: Record<Locale, Record<string, string>> = {
 
         'a11y.loading': 'Loading',
         'a11y.language_select': 'Language',
+
+        // Coming Soon
+        'coming_soon.title': 'Coming Soon',
+        'coming_soon.description': 'Objective tools for artist brand development and informed evaluation for collectors.',
+        'coming_soon.ecosystem_label': 'A FlorenceEGI ecosystem organ',
     },
 
     de: {
@@ -257,6 +267,11 @@ const translations: Record<Locale, Record<string, string>> = {
 
         'a11y.loading': 'Wird geladen',
         'a11y.language_select': 'Sprache',
+
+        // Coming Soon
+        'coming_soon.title': 'Demnächst verfügbar',
+        'coming_soon.description': 'Objektive Werkzeuge für die Entwicklung des Künstlers als Marke und fundierte Bewertung für Sammler.',
+        'coming_soon.ecosystem_label': 'Ein Organ des Ökosystems',
     },
 
     es: {
@@ -336,6 +351,11 @@ const translations: Record<Locale, Record<string, string>> = {
 
         'a11y.loading': 'Cargando',
         'a11y.language_select': 'Idioma',
+
+        // Coming Soon
+        'coming_soon.title': 'Próximamente',
+        'coming_soon.description': 'Herramientas objetivas para el desarrollo del artista como marca y evaluación informada para coleccionistas.',
+        'coming_soon.ecosystem_label': 'Un órgano del ecosistema',
     },
 
     fr: {
@@ -415,6 +435,11 @@ const translations: Record<Locale, Record<string, string>> = {
 
         'a11y.loading': 'Chargement en cours',
         'a11y.language_select': 'Langue',
+
+        // Coming Soon
+        'coming_soon.title': 'Bientôt disponible',
+        'coming_soon.description': 'Outils objectifs pour le développement de l\'artiste en tant que marque et évaluation éclairée pour les collectionneurs.',
+        'coming_soon.ecosystem_label': 'Un organe de l\'écosystème',
     },
 
     pt: {
@@ -494,6 +519,11 @@ const translations: Record<Locale, Record<string, string>> = {
 
         'a11y.loading': 'A carregar',
         'a11y.language_select': 'Idioma',
+
+        // Coming Soon
+        'coming_soon.title': 'Em breve',
+        'coming_soon.description': 'Ferramentas objetivas para o desenvolvimento do artista como marca e avaliação informada para colecionadores.',
+        'coming_soon.ecosystem_label': 'Um órgão do ecossistema',
     },
 };
 

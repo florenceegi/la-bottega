@@ -100,7 +100,7 @@ export function MaestroChat({ user, maestroDown, onboardingResult }: Props) {
                     <EmptyState maestroDown={maestroDown} />
                 )}
 
-                <div className="max-w-2xl mx-auto space-y-5">
+                <div className="max-w-2xl mx-auto space-y-5" aria-live="polite" aria-relevant="additions">
                     {messages.map((msg, i) => (
                         <MessageBubble key={i} message={msg} />
                     ))}

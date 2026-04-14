@@ -6,7 +6,11 @@
  * @purpose Landing Coming Soon — palette oro (#D4AF37) su navy (#1B2A4A)
  */
 
+import { useTranslation } from '@/hooks/useTranslation';
+
 export function ComingSoon() {
+    const { t } = useTranslation();
+
     return (
         <div className="min-h-screen bg-[#1B2A4A] flex flex-col items-center justify-center px-6 text-center">
             <div className="max-w-lg">
@@ -17,21 +21,20 @@ export function ComingSoon() {
                         </svg>
                     </div>
                     <h1 className="text-4xl md:text-5xl font-light text-white tracking-wide mb-3">
-                        La Bottega
+                        {t('app.title')}
                     </h1>
                     <div className="w-16 h-px bg-[#D4AF37] mx-auto mb-6" />
                     <p className="text-[#D4AF37] text-lg font-light tracking-widest uppercase mb-8">
-                        Coming Soon
+                        {t('coming_soon.title')}
                     </p>
                 </div>
 
                 <p className="text-gray-300 text-base leading-relaxed mb-8">
-                    Strumenti oggettivi per lo sviluppo dell'artista come brand
-                    e valutazione informata per il collezionista.
+                    {t('coming_soon.description')}
                 </p>
 
                 <p className="text-gray-500 text-sm">
-                    Un organo dell'ecosistema{' '}
+                    {t('coming_soon.ecosystem_label')}{' '}
                     <a
                         href="https://florenceegi.com"
                         className="text-[#D4AF37] hover:text-[#E5C76B] transition-colors"
