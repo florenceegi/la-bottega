@@ -65,13 +65,13 @@ class ValutazioneIngressoService
         }
 
         if ($diagnostic['scores']['identity'] >= 20) {
-            $strengths[] = 'Identita artistica ben definita';
+            $strengths[] = __('bottega.strength_identity');
         }
         if ($diagnostic['scores']['completeness'] >= 20) {
-            $strengths[] = 'Portfolio ben fornito';
+            $strengths[] = __('bottega.strength_portfolio');
         }
         if ($diagnostic['scores']['visibility'] >= 15) {
-            $strengths[] = 'Buona visibilita';
+            $strengths[] = __('bottega.strength_visibility');
         }
 
         return [

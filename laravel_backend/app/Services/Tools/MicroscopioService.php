@@ -180,7 +180,7 @@ class MicroscopioService
 
         foreach ($egisData as $egi) {
             $description = $egi['description'] ?? '';
-            $title = $egi['title'] ?? $egi['name'] ?? 'Opera senza titolo';
+            $title = $egi['title'] ?? $egi['name'] ?? __('bottega.untitled_artwork');
 
             if (empty($description) || strlen($description) < self::MIN_DESCRIPTION_LENGTH) {
                 $weakCount++;

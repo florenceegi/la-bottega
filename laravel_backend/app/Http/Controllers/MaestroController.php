@@ -18,6 +18,7 @@ use App\Services\Maestro\ProfileDiagnosticService;
 use App\Services\Maestro\ValutazioneIngressoService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Ultra\ErrorManager\Interfaces\ErrorManagerInterface;
 
 class MaestroController extends Controller
 {
@@ -26,6 +27,7 @@ class MaestroController extends Controller
         private NextStepEngine $nextStepEngine,
         private ProfileDiagnosticService $diagnosticService,
         private ValutazioneIngressoService $valutazioneService,
+        private ErrorManagerInterface $errorManager,
     ) {}
 
     /**
@@ -39,17 +41,23 @@ class MaestroController extends Controller
             'session_id' => 'nullable|uuid',
         ]);
 
-        $user = $request->user();
-        $instance = $this->resolveInstance($user);
+        try {
+            $user = $request->user();
+            $instance = $this->resolveInstance($user);
 
-        $result = $this->maestroService->chat(
-            $user->id,
-            $request->input('message'),
-            $instance,
-            $request->input('session_id'),
-        );
+            $result = $this->maestroService->chat(
+                $user->id,
+                $request->input('message'),
+                $instance,
+                $request->input('session_id'),
+            );
 
-        return response()->json($result);
+            return response()->json($result);
+        } catch (\Exception $e) {
+            return $this->errorManager->handle('BOTTEGA_MAESTRO_CHAT_ERROR', [
+                'user_id' => $request->user()->id,
+            ], $e);
+        }
     }
 
     /**
@@ -61,7 +69,7 @@ class MaestroController extends Controller
         $profile = ArtistProfile::where('user_id', $request->user()->id)->first();
 
         if (!$profile) {
-            return response()->json(['error' => 'Profilo artista non trovato'], 404);
+            return response()->json(['error' => __('bottega.profile_not_found')], 404);
         }
 
         $nextStep = $this->nextStepEngine->evaluate($profile);
@@ -78,7 +86,7 @@ class MaestroController extends Controller
         $profile = ArtistProfile::where('user_id', $request->user()->id)->first();
 
         if (!$profile) {
-            return response()->json(['error' => 'Profilo artista non trovato'], 404);
+            return response()->json(['error' => __('bottega.profile_not_found')], 404);
         }
 
         $diagnostic = $this->diagnosticService->diagnose($profile);
@@ -101,7 +109,7 @@ class MaestroController extends Controller
 
         if ($profile->onboarding_completed_at) {
             return response()->json([
-                'error' => 'Onboarding gia completato',
+                'error' => __('bottega.onboarding_already_completed'),
                 'completed_at' => $profile->onboarding_completed_at->toIso8601String(),
             ], 409);
         }

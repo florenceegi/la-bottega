@@ -77,7 +77,7 @@ PROMPT;
 
         // TODO: chiamata a Bottega Python AI service (fase successiva)
         $response = [
-            'message' => '[Maestro non ancora connesso al Python AI service]',
+            'message' => __('bottega.maestro_not_connected'),
             'tokens_used' => 0,
             'model_used' => 'pending',
         ];
@@ -182,16 +182,16 @@ PROMPT;
         $lines = [];
 
         if (!empty($context['structured']['egis_count'])) {
-            $lines[] = "Opere caricate: {$context['structured']['egis_count']}";
+            $lines[] = __('bottega.context_artworks') . ': ' . $context['structured']['egis_count'];
         }
         if (!empty($context['structured']['collections_count'])) {
-            $lines[] = "Collezioni: {$context['structured']['collections_count']}";
+            $lines[] = __('bottega.context_collections') . ': ' . $context['structured']['collections_count'];
         }
         if (!empty($context['structured']['sales_count'])) {
-            $lines[] = "Vendite: {$context['structured']['sales_count']}";
+            $lines[] = __('bottega.context_sales') . ': ' . $context['structured']['sales_count'];
         }
         if (!empty($context['meta']['percorso'])) {
-            $lines[] = "Percorso: {$context['meta']['percorso']}";
+            $lines[] = 'Percorso: ' . $context['meta']['percorso'];
         }
         if (!empty($context['meta']['completeness'])) {
             $lines[] = "Completezza profilo: {$context['meta']['completeness']}%";
@@ -201,6 +201,6 @@ PROMPT;
             $lines[] = "Next step: " . ($step['description'] ?? 'N/A');
         }
 
-        return implode("\n", $lines) ?: 'Nessun dato disponibile.';
+        return implode("\n", $lines) ?: __('bottega.no_data_available');
     }
 }

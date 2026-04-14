@@ -31,7 +31,7 @@ class PercorsoController extends Controller
         $profile = ArtistProfile::where('user_id', $request->user()->id)->first();
 
         if (!$profile) {
-            return response()->json(['error' => 'Profilo artista non trovato'], 404);
+            return response()->json(['error' => __('bottega.profile_not_found')], 404);
         }
 
         $status = $this->nextStepEngine->getStatus($profile);
@@ -53,7 +53,7 @@ class PercorsoController extends Controller
         $profile = ArtistProfile::where('user_id', $request->user()->id)->first();
 
         if (!$profile) {
-            return response()->json(['error' => 'Profilo artista non trovato'], 404);
+            return response()->json(['error' => __('bottega.profile_not_found')], 404);
         }
 
         $percorso = $profile->percorso_current ?? 'zero';
@@ -91,7 +91,7 @@ class PercorsoController extends Controller
         $profile = ArtistProfile::where('user_id', $request->user()->id)->first();
 
         if (!$profile) {
-            return response()->json(['error' => 'Profilo artista non trovato'], 404);
+            return response()->json(['error' => __('bottega.profile_not_found')], 404);
         }
 
         $completions = StepCompletion::where('artist_profile_id', $profile->id)

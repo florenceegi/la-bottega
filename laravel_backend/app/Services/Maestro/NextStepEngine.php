@@ -25,31 +25,35 @@ class NextStepEngine
     /**
      * Mappa fase → step nel Percorso ZERO (16 step totali, 4 per fase).
      */
-    private const PERCORSO_ZERO_STEPS = [
-        1 => ['fase' => 1, 'label' => 'Scegli il tuo medium primario', 'field_check' => 'medium_primary'],
-        2 => ['fase' => 1, 'label' => 'Scrivi la tua Origine', 'field_check' => null],
-        3 => ['fase' => 1, 'label' => 'Definisci il tuo stile in una frase', 'field_check' => 'artist_statement_short'],
-        4 => ['fase' => 1, 'label' => 'Carica le tue 5 opere fondanti', 'field_check' => null],
-        5 => ['fase' => 2, 'label' => 'Definisci la tua logica di prezzo', 'field_check' => null],
-        6 => ['fase' => 2, 'label' => 'Ottimizza il profilo pubblico FlorenceEGI', 'field_check' => null],
-        7 => ['fase' => 2, 'label' => 'Imposta Instagram come canale di scoperta', 'field_check' => 'instagram_username'],
-        8 => ['fase' => 2, 'label' => 'Prima storia Instagram con link FlorenceEGI', 'field_check' => null],
-        9 => ['fase' => 3, 'label' => 'Costruisci la prima lista email — i 50 contatti zero', 'field_check' => null],
-        10 => ['fase' => 3, 'label' => 'Identifica i 10 potenziali primi collezionisti', 'field_check' => null],
-        11 => ['fase' => 3, 'label' => 'Il messaggio diretto', 'field_check' => null],
-        12 => ['fase' => 3, 'label' => 'Prima vendita — documentarla e celebrarla', 'field_check' => null],
-        13 => ['fase' => 4, 'label' => 'Prima newsletter mensile', 'field_check' => null],
-        14 => ['fase' => 4, 'label' => 'Identifica primo interior designer o spazio commerciale', 'field_check' => null],
-        15 => ['fase' => 4, 'label' => 'Seconda collezione con coerenza verificata', 'field_check' => null],
-        16 => ['fase' => 4, 'label' => 'Prima credenziale EGI Credential', 'field_check' => null],
+    private const PERCORSO_ZERO_STRUCTURE = [
+        1 => ['fase' => 1, 'label_key' => 'step_1', 'field_check' => 'medium_primary'],
+        2 => ['fase' => 1, 'label_key' => 'step_2', 'field_check' => null],
+        3 => ['fase' => 1, 'label_key' => 'step_3', 'field_check' => 'artist_statement_short'],
+        4 => ['fase' => 1, 'label_key' => 'step_4', 'field_check' => null],
+        5 => ['fase' => 2, 'label_key' => 'step_5', 'field_check' => null],
+        6 => ['fase' => 2, 'label_key' => 'step_6', 'field_check' => null],
+        7 => ['fase' => 2, 'label_key' => 'step_7', 'field_check' => 'instagram_username'],
+        8 => ['fase' => 2, 'label_key' => 'step_8', 'field_check' => null],
+        9 => ['fase' => 3, 'label_key' => 'step_9', 'field_check' => null],
+        10 => ['fase' => 3, 'label_key' => 'step_10', 'field_check' => null],
+        11 => ['fase' => 3, 'label_key' => 'step_11', 'field_check' => null],
+        12 => ['fase' => 3, 'label_key' => 'step_12', 'field_check' => null],
+        13 => ['fase' => 4, 'label_key' => 'step_13', 'field_check' => null],
+        14 => ['fase' => 4, 'label_key' => 'step_14', 'field_check' => null],
+        15 => ['fase' => 4, 'label_key' => 'step_15', 'field_check' => null],
+        16 => ['fase' => 4, 'label_key' => 'step_16', 'field_check' => null],
     ];
 
-    private const FASE_LABELS = [
-        1 => 'Identita',
-        2 => 'Presenza Digitale',
-        3 => 'Prima Vendita',
-        4 => 'Costruire il Ritmo',
-    ];
+    private static function faseLabel(int $fase): string
+    {
+        return match ($fase) {
+            1 => __('bottega.fase_1'),
+            2 => __('bottega.fase_2'),
+            3 => __('bottega.fase_3'),
+            4 => __('bottega.fase_4'),
+            default => '',
+        };
+    }
 
     public function __construct(
         private EgiApiClient $egiClient,
@@ -83,9 +87,9 @@ class NextStepEngine
             return [
                 'percorso' => $percorso,
                 'fase' => $stepDef['fase'],
-                'fase_label' => self::FASE_LABELS[$stepDef['fase']] ?? '',
+                'fase_label' => self::faseLabel($stepDef['fase']),
                 'step_number' => $stepNumber,
-                'description' => $stepDef['label'],
+                'description' => __('bottega.' . $stepDef['label_key']),
                 'total_completed' => count($completions),
                 'total_steps' => count($steps),
             ];
@@ -94,9 +98,9 @@ class NextStepEngine
         return [
             'percorso' => $percorso,
             'fase' => 4,
-            'fase_label' => 'Completato',
+            'fase_label' => __('bottega.fase_completed'),
             'step_number' => null,
-            'description' => 'Percorso completato — profilo eccellente',
+            'description' => __('bottega.percorso_completed'),
             'total_completed' => count($completions),
             'total_steps' => count($steps),
         ];
@@ -132,8 +136,8 @@ class NextStepEngine
     {
         // Per ora solo Percorso ZERO implementato — CRESCITA e MERCATO in fasi successive
         return match ($percorso) {
-            'zero' => self::PERCORSO_ZERO_STEPS,
-            default => self::PERCORSO_ZERO_STEPS,
+            'zero' => self::PERCORSO_ZERO_STRUCTURE,
+            default => self::PERCORSO_ZERO_STRUCTURE,
         };
     }
 }

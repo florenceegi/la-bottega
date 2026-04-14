@@ -48,26 +48,26 @@ class ProfileDiagnosticService
         if (!empty($profile->medium_primary)) {
             $identityScore += 5;
         } else {
-            $findings[] = ['priority' => 'high', 'category' => 'identity', 'message' => 'Medium primario non definito'];
+            $findings[] = ['priority' => 'high', 'category' => 'identity', 'message' => __('bottega.diag_medium_missing')];
         }
 
         if (!empty($profile->artist_statement_short)) {
             $identityScore += 5;
         } else {
-            $findings[] = ['priority' => 'high', 'category' => 'identity', 'message' => 'Artist statement mancante'];
+            $findings[] = ['priority' => 'high', 'category' => 'identity', 'message' => __('bottega.diag_statement_missing')];
         }
 
         $hasBio = is_array($biography) && !empty($biography['chapters'] ?? $biography['data'] ?? null);
         if ($hasBio) {
             $identityScore += 10;
         } else {
-            $findings[] = ['priority' => 'critical', 'category' => 'identity', 'message' => 'Bio assente — i collezionisti la leggono prima di comprare'];
+            $findings[] = ['priority' => 'critical', 'category' => 'identity', 'message' => __('bottega.diag_bio_absent')];
         }
 
         if (!empty($profile->instagram_username)) {
             $identityScore += 5;
         } else {
-            $findings[] = ['priority' => 'medium', 'category' => 'identity', 'message' => 'Instagram non configurato'];
+            $findings[] = ['priority' => 'medium', 'category' => 'identity', 'message' => __('bottega.diag_instagram_missing')];
         }
 
         $scores['identity'] = min(25, $identityScore);
@@ -81,16 +81,16 @@ class ProfileDiagnosticService
             $completenessScore += 10;
         } elseif ($egisCount > 0) {
             $completenessScore += ($egisCount * 2);
-            $findings[] = ['priority' => 'high', 'category' => 'completeness', 'message' => "Solo {$egisCount} opere — servono almeno 5"];
+            $findings[] = ['priority' => 'high', 'category' => 'completeness', 'message' => __('bottega.diag_few_artworks') . ' (' . $egisCount . ')'];
         } else {
-            $findings[] = ['priority' => 'critical', 'category' => 'completeness', 'message' => 'Nessuna opera caricata'];
+            $findings[] = ['priority' => 'critical', 'category' => 'completeness', 'message' => __('bottega.diag_no_artworks')];
         }
 
         $collectionsData = is_array($collections) ? ($collections['data'] ?? $collections) : [];
         if (count($collectionsData) > 0) {
             $completenessScore += 5;
         } else {
-            $findings[] = ['priority' => 'medium', 'category' => 'completeness', 'message' => 'Nessuna collezione creata'];
+            $findings[] = ['priority' => 'medium', 'category' => 'completeness', 'message' => __('bottega.diag_no_collections')];
         }
 
         // Prezzi presenti
@@ -104,7 +104,7 @@ class ProfileDiagnosticService
         if ($hasPrices) {
             $completenessScore += 5;
         } elseif ($egisCount > 0) {
-            $findings[] = ['priority' => 'high', 'category' => 'completeness', 'message' => 'Opere senza prezzo — servono per il Price Advisor'];
+            $findings[] = ['priority' => 'high', 'category' => 'completeness', 'message' => __('bottega.diag_no_prices')];
         }
 
         // COA Sigillo
@@ -112,7 +112,7 @@ class ProfileDiagnosticService
         if (!empty($blockchainData)) {
             $completenessScore += 5;
         } elseif ($egisCount > 0) {
-            $findings[] = ['priority' => 'medium', 'category' => 'completeness', 'message' => 'Nessun COA Sigillo emesso — argomento di vendita fondamentale'];
+            $findings[] = ['priority' => 'medium', 'category' => 'completeness', 'message' => __('bottega.diag_no_coa')];
         }
 
         $scores['completeness'] = min(25, $completenessScore);
@@ -120,7 +120,7 @@ class ProfileDiagnosticService
         // --- Coherence (25 punti) ---
         $coherenceScore = $profile->coherence_score > 0 ? (int) ($profile->coherence_score * 0.25) : 0;
         if ($coherenceScore < 15 && $egisCount >= 5) {
-            $findings[] = ['priority' => 'medium', 'category' => 'coherence', 'message' => 'Coerenza stilistica bassa — esegui Coherence Check'];
+            $findings[] = ['priority' => 'medium', 'category' => 'coherence', 'message' => __('bottega.diag_low_coherence')];
         }
         $scores['coherence'] = min(25, $coherenceScore);
 
