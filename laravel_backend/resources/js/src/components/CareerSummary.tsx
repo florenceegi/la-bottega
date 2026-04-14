@@ -95,11 +95,7 @@ export function CareerSummary({ percorso }: Props) {
                 </div>
             )}
 
-            {/* Divider */}
-            <div className="w-8 h-px bg-white/5" />
-
-            {/* Community Pulse — FEAT 2 */}
-            <CommunityPulse />
+            {/* Community Pulse — rimosso: richiede endpoint reale /api/community/stats */}
         </div>
     );
 }
@@ -138,30 +134,3 @@ function ScoreCard({ label, value, max }: { label: string; value: number; max: n
     );
 }
 
-function CommunityPulse() {
-    const { t } = useTranslation();
-    const [stats, setStats] = useState<{ artists_completed: number; works_certified: number } | null>(null);
-
-    useEffect(() => {
-        // TODO: endpoint /api/community/stats — static placeholder for now
-        setStats({ artists_completed: 12, works_certified: 347 });
-    }, []);
-
-    if (!stats) return null;
-
-    return (
-        <div className="space-y-2.5">
-            <h4 className="text-[10px] text-gray-600 uppercase tracking-widest">
-                {t('community.title')}
-            </h4>
-            <p className="text-[11px] text-gray-500 leading-relaxed">
-                <span className="text-bottega-gold-light font-medium">{stats.artists_completed}</span>{' '}
-                {t('community.artists_completed')}
-            </p>
-            <p className="text-[11px] text-gray-500 leading-relaxed">
-                <span className="text-bottega-gold-light font-medium">{stats.works_certified}</span>{' '}
-                {t('community.works_certified')}
-            </p>
-        </div>
-    );
-}
