@@ -56,7 +56,7 @@ jobs:
           SCRIPT="$SCRIPT && cd laravel_backend && php artisan migrate --force && php artisan config:cache && php artisan view:clear"
 
           if [ "$FRONTEND" = "true" ]; then
-            SCRIPT="$SCRIPT && npm run build"
+            SCRIPT="$SCRIPT && npm install && npm run build"
           fi
 
           if [ "$PYTHON" = "true" ]; then
