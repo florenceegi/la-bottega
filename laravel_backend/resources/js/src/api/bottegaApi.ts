@@ -1,28 +1,89 @@
 /**
  * @package La Bottega — API Client
  * @author Padmin D. Curtis (AI Partner OS3.0) for Fabio Cherici
- * @version 1.0.0 (FlorenceEGI — La Bottega)
- * @date 2026-04-13
- * @purpose Client HTTP per API La Bottega — Sanctum SSO cookie auth
+ * @version 2.0.0 (FlorenceEGI — La Bottega)
+ * @date 2026-04-14
+ * @purpose Client HTTP per API La Bottega — Bearer token auth cross-domain
  */
 
 const API_BASE = '/api';
+const EGI_API_BASE = import.meta.env.VITE_EGI_API_URL || 'https://art.florenceegi.com/api';
+const TOKEN_KEY = 'bottega_token';
+const USER_KEY = 'bottega_user';
 
+function getToken(): string | null {
+    return localStorage.getItem(TOKEN_KEY);
+}
+
+function setToken(token: string): void {
+    localStorage.setItem(TOKEN_KEY, token);
+}
+
+function removeToken(): void {
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(USER_KEY);
+}
+
+function getCachedUser(): User | null {
+    try {
+        const raw = localStorage.getItem(USER_KEY);
+        return raw ? JSON.parse(raw) : null;
+    } catch {
+        return null;
+    }
+}
+
+function setCachedUser(user: User): void {
+    localStorage.setItem(USER_KEY, JSON.stringify(user));
+}
+
+/**
+ * HTTP request to local La Bottega API — Bearer token auth
+ */
 async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
-    const csrfToken = document.querySelector<HTMLMetaElement>('meta[name="csrf-token"]')?.content;
+    const token = getToken();
 
     const res = await fetch(`${API_BASE}${path}`, {
-        credentials: 'include',
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
-            ...(csrfToken ? { 'X-CSRF-TOKEN': csrfToken } : {}),
+            ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
             ...(options.headers ?? {}),
         },
         ...options,
     });
 
     if (res.status === 401) {
+        removeToken();
+        throw new AuthError('Unauthorized');
+    }
+
+    if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        throw new ApiError(res.status, body.message ?? 'Request failed');
+    }
+
+    return res.json();
+}
+
+/**
+ * HTTP request to EGI core API — Bearer token auth cross-domain
+ */
+async function egiRequest<T>(path: string, options: RequestInit = {}): Promise<T> {
+    const token = getToken();
+
+    const res = await fetch(`${EGI_API_BASE}${path}`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
+            ...(options.headers ?? {}),
+        },
+        ...options,
+    });
+
+    if (res.status === 401) {
+        removeToken();
         throw new AuthError('Unauthorized');
     }
 
@@ -54,7 +115,14 @@ export interface User {
     id: number;
     name: string;
     email: string;
+    nick_name?: string;
+    usertype?: string;
     roles?: string[];
+}
+
+export interface LoginResponse {
+    token: string;
+    user: User;
 }
 
 export interface NextStepResponse {
@@ -171,8 +239,47 @@ export interface MicroscopioFixResult {
 // --- API Methods ---
 
 export const bottegaApi = {
-    // Auth
-    getUser: () => request<User>('/user'),
+    // Auth — Bearer token
+    login: async (email: string, password: string): Promise<LoginResponse> => {
+        const data = await egiRequest<LoginResponse>('/internal/bottega/auth/login', {
+            method: 'POST',
+            body: JSON.stringify({ email, password }),
+        });
+        setToken(data.token);
+        setCachedUser(data.user);
+        return data;
+    },
+
+    register: (data: { name: string; email: string; password: string; password_confirmation: string }) =>
+        egiRequest<LoginResponse>('/internal/bottega/auth/register', {
+            method: 'POST',
+            body: JSON.stringify(data),
+        }),
+
+    logout: (): void => {
+        removeToken();
+        window.dispatchEvent(new CustomEvent('bottega:auth-change'));
+    },
+
+    getUser: async (): Promise<User> => {
+        const cached = getCachedUser();
+        const token = getToken();
+        if (!token) throw new AuthError('No token');
+
+        try {
+            const user = await request<User>('/user');
+            setCachedUser(user);
+            return user;
+        } catch (err) {
+            if (err instanceof AuthError && cached) {
+                removeToken();
+            }
+            throw err;
+        }
+    },
+
+    getToken,
+    hasToken: (): boolean => !!getToken(),
 
     // Maestro
     maestroHealth: () => request<MaestroHealth>('/maestro/health'),
