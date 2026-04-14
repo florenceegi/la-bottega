@@ -52,7 +52,15 @@ class MaestroController extends Controller
                 $request->input('session_id'),
             );
 
-            return response()->json($result);
+            return response()->json([
+                'session_id' => $result['session_id'],
+                'message' => [
+                    'role' => 'assistant',
+                    'content' => $result['message'],
+                    'timestamp' => now()->toIso8601String(),
+                ],
+                'context' => $result['context'],
+            ]);
         } catch (\Exception $e) {
             return $this->errorManager->handle('BOTTEGA_MAESTRO_CHAT_ERROR', [
                 'user_id' => $request->user()->id,
