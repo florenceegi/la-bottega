@@ -61,10 +61,10 @@ export function CareerSummary({ percorso }: Props) {
             {/* Score categories */}
             {diagnostic && (
                 <div className="grid grid-cols-2 gap-2">
-                    <ScoreCard label={t('percorso.fase_identita')} value={diagnostic.categories.identity} max={25} />
-                    <ScoreCard label={t('career.completeness')} value={diagnostic.categories.completeness} max={25} />
-                    <ScoreCard label={t('tools.coherence')} value={diagnostic.categories.coherence} max={25} />
-                    <ScoreCard label={t('tools.visibility')} value={diagnostic.categories.visibility} max={25} />
+                    <ScoreCard label={t('percorso.fase_identita')} value={diagnostic.scores.identity} max={25} />
+                    <ScoreCard label={t('career.completeness')} value={diagnostic.scores.completeness} max={25} />
+                    <ScoreCard label={t('tools.coherence')} value={diagnostic.scores.coherence} max={25} />
+                    <ScoreCard label={t('tools.visibility')} value={diagnostic.scores.visibility} max={25} />
                 </div>
             )}
 
