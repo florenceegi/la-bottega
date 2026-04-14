@@ -89,4 +89,13 @@ return [
     'fix_coherence_low' => 'Coerência baixa — sugestão de reorganização gerada',
     'fix_coherence_ok' => 'Coleção coerente — nenhuma ação necessária',
     'fix_coherence_error' => 'Erro durante a análise de coerência',
+
+    // ── SEO ───────────────────────────────────────────────────────────
+    'meta_description' => 'Ferramentas objetivas para artistas e colecionadores. Diagnóstico, percursos de crescimento e avaliação informada na FlorenceEGI.',
+
+    // ── Context LLM ───────────────────────────────────────────────────
+    'context_percorso' => 'Percurso',
+    'context_completeness' => 'Completude do perfil',
+    'context_next_step' => 'Próximo passo',
+    'no_data_available' => 'Sem dados disponíveis',
 ];

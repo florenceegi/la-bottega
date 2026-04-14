@@ -17,6 +17,11 @@ class BottegaConfigSeeder extends Seeder
 {
     public function run(): void
     {
+        if (app()->environment('production')) {
+            $this->command?->info('BottegaConfigSeeder: skipped in production (demo data).');
+            return;
+        }
+
         $this->seedSampleOpportunities();
     }
 

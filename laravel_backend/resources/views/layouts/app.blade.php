@@ -12,7 +12,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'La Bottega') }}</title>
+    <title>{{ config('app.name', 'La Bottega') }} — FlorenceEGI</title>
+    <meta name="description" content="{{ __('bottega.meta_description') }}">
+    <link rel="canonical" href="https://la-bottega.florenceegi.com">
+
+    {{-- Open Graph --}}
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ config('app.name', 'La Bottega') }} — FlorenceEGI">
+    <meta property="og:description" content="{{ __('bottega.meta_description') }}">
+    <meta property="og:url" content="https://la-bottega.florenceegi.com">
+    <meta property="og:site_name" content="FlorenceEGI">
+
+    {{-- Twitter --}}
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ config('app.name', 'La Bottega') }} — FlorenceEGI">
+    <meta name="twitter:description" content="{{ __('bottega.meta_description') }}">
 
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:300,400,500,600,700" rel="stylesheet" />

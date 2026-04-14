@@ -62,7 +62,7 @@ export interface ContextualButton {
 
 export interface ProfileDiagnostic {
     total_score: number;
-    categories: {
+    scores: {
         identity: number;
         completeness: number;
         coherence: number;

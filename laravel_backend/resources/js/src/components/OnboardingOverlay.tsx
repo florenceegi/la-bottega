@@ -39,7 +39,7 @@ export function OnboardingOverlay({ user, onComplete }: Props) {
                         .catch(() => {
                             // Graceful fallback — skip onboarding
                             onComplete({
-                                diagnostic: { total_score: 0, categories: { identity: 0, completeness: 0, coherence: 0, visibility: 0 }, findings: [] },
+                                diagnostic: { total_score: 0, scores: { identity: 0, completeness: 0, coherence: 0, visibility: 0 }, findings: [] },
                                 percorso_assigned: 'zero',
                                 next_step: {} as OnboardingResult['next_step'],
                                 welcome_context: { strengths: [], gaps: [], first_step_description: '' },

@@ -72,9 +72,14 @@ class MaestroController extends Controller
             return response()->json(['error' => __('bottega.profile_not_found')], 404);
         }
 
-        $nextStep = $this->nextStepEngine->evaluate($profile);
-
-        return response()->json($nextStep);
+        try {
+            $nextStep = $this->nextStepEngine->evaluate($profile);
+            return response()->json($nextStep);
+        } catch (\Exception $e) {
+            return $this->errorManager->handle('BOTTEGA_NEXT_STEP_ERROR', [
+                'user_id' => $request->user()->id,
+            ], $e);
+        }
     }
 
     /**
@@ -89,9 +94,14 @@ class MaestroController extends Controller
             return response()->json(['error' => __('bottega.profile_not_found')], 404);
         }
 
-        $diagnostic = $this->diagnosticService->diagnose($profile);
-
-        return response()->json($diagnostic);
+        try {
+            $diagnostic = $this->diagnosticService->diagnose($profile);
+            return response()->json($diagnostic);
+        } catch (\Exception $e) {
+            return $this->errorManager->handle('BOTTEGA_PROFILE_DIAGNOSTIC_ERROR', [
+                'user_id' => $request->user()->id,
+            ], $e);
+        }
     }
 
     /**

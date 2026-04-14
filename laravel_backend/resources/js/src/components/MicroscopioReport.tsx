@@ -282,18 +282,7 @@ function Recommendations({
                         onClick={onFixDescriptions}
                     />
                 )}
-                <FixButton
-                    label={t('microscopio.fix_pricing')}
-                    loading={fixing === 'pricing'}
-                    loadingLabel={t('microscopio.fixing')}
-                    onClick={() => onFixPricing(0)}
-                />
-                <FixButton
-                    label={t('microscopio.fix_coherence')}
-                    loading={fixing === 'coherence'}
-                    loadingLabel={t('microscopio.fixing')}
-                    onClick={() => onFixCoherence(0)}
-                />
+                {/* Fix pricing e coherence richiedono ID specifici dal report — disabilitati fino a implementazione */}
             </div>
         </div>
     );

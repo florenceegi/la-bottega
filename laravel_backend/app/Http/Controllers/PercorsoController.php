@@ -3,8 +3,8 @@
 /**
  * @package App\Http\Controllers
  * @author Padmin D. Curtis (AI Partner OS3.0) for Fabio Cherici
- * @version 1.0.0 (FlorenceEGI — La Bottega)
- * @date 2026-04-12
+ * @version 1.1.0 (FlorenceEGI — La Bottega)
+ * @date 2026-04-14
  * @purpose Endpoint percorso artista — stato, completamento step, storico
  */
 
@@ -15,16 +15,17 @@ use App\Models\StepCompletion;
 use App\Services\Maestro\NextStepEngine;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Ultra\ErrorManager\Interfaces\ErrorManagerInterface;
 
 class PercorsoController extends Controller
 {
     public function __construct(
         private NextStepEngine $nextStepEngine,
+        private ErrorManagerInterface $errorManager,
     ) {}
 
     /**
      * GET /api/percorso/status
-     * Stato corrente del percorso: fase, step completati, progresso.
      */
     public function status(Request $request): JsonResponse
     {
@@ -34,14 +35,18 @@ class PercorsoController extends Controller
             return response()->json(['error' => __('bottega.profile_not_found')], 404);
         }
 
-        $status = $this->nextStepEngine->getStatus($profile);
-
-        return response()->json($status);
+        try {
+            $status = $this->nextStepEngine->getStatus($profile);
+            return response()->json($status);
+        } catch (\Exception $e) {
+            return $this->errorManager->handle('BOTTEGA_PERCORSO_STATUS_ERROR', [
+                'user_id' => $request->user()->id,
+            ], $e);
+        }
     }
 
     /**
      * POST /api/percorso/complete-step
-     * Segna uno step come completato.
      */
     public function completeStep(Request $request): JsonResponse
     {
@@ -56,35 +61,41 @@ class PercorsoController extends Controller
             return response()->json(['error' => __('bottega.profile_not_found')], 404);
         }
 
-        $percorso = $profile->percorso_current ?? 'zero';
-        $stepNumber = $request->input('step_number');
-        $fase = (int) ceil($stepNumber / 4);
+        try {
+            $percorso = $profile->percorso_current ?? 'zero';
+            $stepNumber = $request->input('step_number');
+            $fase = (int) ceil($stepNumber / 4);
 
-        $completion = StepCompletion::updateOrCreate(
-            [
-                'artist_profile_id' => $profile->id,
-                'percorso' => $percorso,
-                'fase' => $fase,
-                'step_number' => $stepNumber,
-            ],
-            [
-                'status' => 'completed',
-                'completed_at' => now(),
-                'verification_data' => $request->input('verification_data'),
-            ],
-        );
+            $completion = StepCompletion::updateOrCreate(
+                [
+                    'artist_profile_id' => $profile->id,
+                    'percorso' => $percorso,
+                    'fase' => $fase,
+                    'step_number' => $stepNumber,
+                ],
+                [
+                    'status' => 'completed',
+                    'completed_at' => now(),
+                    'verification_data' => $request->input('verification_data'),
+                ],
+            );
 
-        $nextStep = $this->nextStepEngine->evaluate($profile);
+            $nextStep = $this->nextStepEngine->evaluate($profile);
 
-        return response()->json([
-            'completed' => $completion->toArray(),
-            'next_step' => $nextStep,
-        ]);
+            return response()->json([
+                'completed' => $completion->toArray(),
+                'next_step' => $nextStep,
+            ]);
+        } catch (\Exception $e) {
+            return $this->errorManager->handle('BOTTEGA_PERCORSO_COMPLETE_ERROR', [
+                'user_id' => $request->user()->id,
+                'step_number' => $request->input('step_number'),
+            ], $e);
+        }
     }
 
     /**
      * GET /api/percorso/history
-     * Storico completamenti step.
      */
     public function history(Request $request): JsonResponse
     {

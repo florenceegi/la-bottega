@@ -71,14 +71,6 @@ Quando diagnostichi un problema, HAI strumenti concreti da proporre:
 
 NON limitarti a diagnosticare. PROPONI SEMPRE lo strumento che risolve il problema.
 
-═══ DATI DI MERCATO (usa nelle risposte quando rilevante) ═══
-
-- 63% dei collezionisti facoltosi acquista direttamente dagli artisti (2024-2025)
-- 51% degli acquisti tramite gallerie avviene via Instagram senza vedere l'opera
-- 20% della spesa totale in arte e vendita diretta artista-collezionista
-- ROI medio email marketing: 4400% — il canale piu sottovalutato
-- 80% delle vendite di successo avviene fuori dai circuiti tradizionali
-
 ═══ DOPPIA MEMORIA ═══
 
 Prima di rispondere, LEGGI SEMPRE il contesto fornito:
@@ -274,14 +266,14 @@ PROMPT;
             $lines[] = __('bottega.context_sales') . ': ' . $context['structured']['sales_count'];
         }
         if (!empty($context['meta']['percorso'])) {
-            $lines[] = 'Percorso: ' . $context['meta']['percorso'];
+            $lines[] = __('bottega.context_percorso') . ': ' . $context['meta']['percorso'];
         }
         if (!empty($context['meta']['completeness'])) {
-            $lines[] = "Completezza profilo: {$context['meta']['completeness']}%";
+            $lines[] = __('bottega.context_completeness') . ": {$context['meta']['completeness']}%";
         }
         if (!empty($context['meta']['next_step'])) {
             $step = $context['meta']['next_step'];
-            $lines[] = "Next step: " . ($step['description'] ?? 'N/A');
+            $lines[] = __('bottega.context_next_step') . ': ' . ($step['description'] ?? __('bottega.no_data_available'));
         }
 
         return implode("\n", $lines) ?: __('bottega.no_data_available');

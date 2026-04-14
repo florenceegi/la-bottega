@@ -89,4 +89,13 @@ return [
     'fix_coherence_low' => 'Niedrige Kohärenz — Reorganisationsvorschlag erstellt',
     'fix_coherence_ok' => 'Sammlung ist kohärent — kein Eingriff nötig',
     'fix_coherence_error' => 'Fehler bei der Kohärenzanalyse',
+
+    // ── SEO ───────────────────────────────────────────────────────────
+    'meta_description' => 'Objektive Werkzeuge für Künstler und Sammler. Diagnostik, Wachstumspfade und fundierte Bewertung auf FlorenceEGI.',
+
+    // ── Context LLM ───────────────────────────────────────────────────
+    'context_percorso' => 'Weg',
+    'context_completeness' => 'Profilvollständigkeit',
+    'context_next_step' => 'Nächster Schritt',
+    'no_data_available' => 'Keine Daten verfügbar',
 ];
