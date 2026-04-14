@@ -262,16 +262,23 @@ export const bottegaApi = {
     },
 
     getUser: async (): Promise<User> => {
-        const cached = getCachedUser();
         const token = getToken();
         if (!token) throw new AuthError('No token');
 
+        // Token is EGI-issued — validate against EGI, not local backend
         try {
-            const user = await request<User>('/user');
+            const data = await egiRequest<{ id: number; name: string; email: string; nick_name?: string; usertype?: string }>('/user');
+            const user: User = {
+                id: data.id,
+                name: data.name,
+                email: data.email,
+                nick_name: data.nick_name,
+                usertype: data.usertype,
+            };
             setCachedUser(user);
             return user;
         } catch (err) {
-            if (err instanceof AuthError && cached) {
+            if (err instanceof AuthError) {
                 removeToken();
             }
             throw err;
