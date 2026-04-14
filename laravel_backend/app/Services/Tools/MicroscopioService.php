@@ -17,6 +17,7 @@ namespace App\Services\Tools;
 
 use App\Models\ArtistProfile;
 use App\Services\ApiClients\EgiApiClient;
+use App\Services\ApiClients\NpeApiClient;
 use App\Services\Maestro\ProfileDiagnosticService;
 use Illuminate\Support\Facades\DB;
 use Ultra\ErrorManager\Interfaces\ErrorManagerInterface;
@@ -30,6 +31,7 @@ class MicroscopioService
     public function __construct(
         private readonly ProfileDiagnosticService $diagnosticService,
         private readonly EgiApiClient $egiClient,
+        private readonly NpeApiClient $npeClient,
         private readonly UltraLogManager $logger,
         private readonly ErrorManagerInterface $errorManager,
     ) {}
@@ -249,6 +251,111 @@ class MicroscopioService
         }
 
         return $recommendations;
+    }
+
+    /**
+     * Fix: rigenera descrizioni deboli via NPE Council (B.1.3).
+     * Chiama NpeApiClient::bulkDescriptions() per le opere con descrizione assente o corta.
+     */
+    public function fixDescriptions(ArtistProfile $profile, string $language = 'it'): array
+    {
+        try {
+            $egis = $this->egiClient->getEgis($profile->user_id);
+            $egisData = is_array($egis) ? ($egis['data'] ?? $egis) : [];
+
+            $weakEgiIds = [];
+            foreach ($egisData as $egi) {
+                $description = $egi['description'] ?? '';
+                if (empty($description) || strlen($description) < self::MIN_DESCRIPTION_LENGTH) {
+                    $weakEgiIds[] = $egi['id'];
+                }
+            }
+
+            if (empty($weakEgiIds)) {
+                return ['fixed' => 0, 'message' => __('bottega.fix_no_weak_descriptions')];
+            }
+
+            $result = $this->npeClient->bulkDescriptions($weakEgiIds, $language);
+
+            $this->logger->info('Microscopio fix descriptions via NPE Council', [
+                'user_id' => $profile->user_id,
+                'egi_ids_count' => count($weakEgiIds),
+            ]);
+
+            return [
+                'fixed' => count($weakEgiIds),
+                'npe_result' => $result,
+                'message' => __('bottega.fix_descriptions_sent') . ' (' . count($weakEgiIds) . ')',
+            ];
+        } catch (\Exception $e) {
+            $this->errorManager->handle('BOTTEGA_FIX_DESCRIPTIONS_ERROR', [
+                'user_id' => $profile->user_id,
+            ], $e);
+
+            return ['fixed' => 0, 'error' => __('bottega.fix_descriptions_error')];
+        }
+    }
+
+    /**
+     * Fix: analisi prezzi via NPE Price Advisor (B.2 wrapper).
+     * Chiama NpeApiClient::getPriceAdvisorResult() per una singola opera.
+     */
+    public function fixPricing(int $egiId): array
+    {
+        try {
+            $result = $this->npeClient->getPriceAdvisorResult($egiId);
+
+            $this->logger->info('Microscopio fix pricing via NPE Price Advisor', [
+                'egi_id' => $egiId,
+            ]);
+
+            return [
+                'egi_id' => $egiId,
+                'pricing_result' => $result,
+                'message' => __('bottega.fix_pricing_complete'),
+            ];
+        } catch (\Exception $e) {
+            $this->errorManager->handle('BOTTEGA_FIX_PRICING_ERROR', [
+                'egi_id' => $egiId,
+            ], $e);
+
+            return ['egi_id' => $egiId, 'error' => __('bottega.fix_pricing_error')];
+        }
+    }
+
+    /**
+     * Fix: analisi coerenza collezione via NPE CollectionSplitter (B.1.2).
+     * Chiama NpeApiClient::getCoherenceScore() + splitCollection() se necessario.
+     */
+    public function fixCoherence(int $collectionId): array
+    {
+        try {
+            $coherence = $this->npeClient->getCoherenceScore($collectionId);
+            $coherenceScore = $coherence['score'] ?? $coherence['coherence_score'] ?? 0;
+
+            $result = ['collection_id' => $collectionId, 'coherence' => $coherence];
+
+            if ($coherenceScore < self::TRAIT_COHERENCE_THRESHOLD) {
+                $splitResult = $this->npeClient->splitCollection($collectionId);
+                $result['split_suggestion'] = $splitResult;
+                $result['message'] = __('bottega.fix_coherence_low');
+            } else {
+                $result['message'] = __('bottega.fix_coherence_ok');
+            }
+
+            $this->logger->info('Microscopio fix coherence via NPE CollectionSplitter', [
+                'collection_id' => $collectionId,
+                'coherence_score' => $coherenceScore,
+            ]);
+
+            return $result;
+        } catch (\Exception $e) {
+            $this->errorManager->handle('BOTTEGA_FIX_COHERENCE_ERROR', [
+                'collection_id' => $collectionId,
+            ], $e);
+
+            return ['collection_id' => $collectionId, 'error' => __('bottega.fix_coherence_error')];
+        }
     }
 
     /**

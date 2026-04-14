@@ -79,4 +79,14 @@ return [
     'action_set_prices' => 'Set your prices',
     'action_improve_descriptions' => 'Improve descriptions',
     'action_coherence_check' => 'Run Coherence Check',
+
+    // ── MicroscopioService — fix NPE results ──────────────────────
+    'fix_no_weak_descriptions' => 'All descriptions are already adequate',
+    'fix_descriptions_sent' => 'Descriptions sent to NPE Council for regeneration',
+    'fix_descriptions_error' => 'Error during description regeneration',
+    'fix_pricing_complete' => 'Price analysis completed',
+    'fix_pricing_error' => 'Error during price analysis',
+    'fix_coherence_low' => 'Low coherence — reorganization suggestion generated',
+    'fix_coherence_ok' => 'Collection is coherent — no action needed',
+    'fix_coherence_error' => 'Error during coherence analysis',
 ];

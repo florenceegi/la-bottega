@@ -40,6 +40,9 @@ Route::middleware('auth:sanctum')->group(function () {
     // --- Strumenti ---
     Route::get('/tools/microscopio/run', [MicroscopioController::class, 'run']);
     Route::get('/tools/microscopio/history', [MicroscopioController::class, 'history']);
+    Route::post('/tools/microscopio/fix/descriptions', [MicroscopioController::class, 'fixDescriptions']);
+    Route::post('/tools/microscopio/fix/pricing', [MicroscopioController::class, 'fixPricing']);
+    Route::post('/tools/microscopio/fix/coherence', [MicroscopioController::class, 'fixCoherence']);
 
     // --- Percorso ---
     Route::get('/percorso/status', [PercorsoController::class, 'status']);
