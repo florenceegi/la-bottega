@@ -14,6 +14,8 @@ use App\Models\ArtistProfile;
 use App\Models\MaestroConversation;
 use App\Models\MaestroMemory;
 use App\Services\ApiClients\EgiApiClient;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class MaestroDiBottegaService
@@ -162,12 +164,7 @@ PROMPT;
 
         $llmMessages = $this->prepareLlmMessages($userId, $instance, $sessionId, $context, $message);
 
-        // TODO: chiamata a Bottega Python AI service (fase successiva)
-        $response = [
-            'message' => __('bottega.maestro_not_connected'),
-            'tokens_used' => 0,
-            'model_used' => 'pending',
-        ];
+        $response = $this->callPythonAi($llmMessages);
 
         MaestroConversation::create([
             'user_id' => $userId,
@@ -290,5 +287,52 @@ PROMPT;
         }
 
         return implode("\n", $lines) ?: __('bottega.no_data_available');
+    }
+
+    private function callPythonAi(array $messages): array
+    {
+        $baseUrl = config('services.bottega_python.url', 'http://localhost:8002');
+
+        try {
+            $response = Http::timeout(35)
+                ->post("{$baseUrl}/api/v1/chat", [
+                    'messages' => $messages,
+                ]);
+
+            if ($response->successful()) {
+                $data = $response->json();
+
+                if (!empty($data['error']) && $data['message'] === null) {
+                    Log::warning('Bottega Python AI error', ['error' => $data['error']]);
+
+                    return [
+                        'message' => __('bottega.maestro_temporarily_unavailable'),
+                        'tokens_used' => 0,
+                        'model_used' => $data['model_used'] ?? 'error',
+                    ];
+                }
+
+                return [
+                    'message' => $data['message'] ?? __('bottega.maestro_empty_response'),
+                    'tokens_used' => $data['tokens_used'] ?? 0,
+                    'model_used' => $data['model_used'] ?? 'unknown',
+                ];
+            }
+
+            Log::error('Bottega Python AI HTTP error', [
+                'status' => $response->status(),
+                'body' => $response->body(),
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Bottega Python AI connection error', [
+                'message' => $e->getMessage(),
+            ]);
+        }
+
+        return [
+            'message' => __('bottega.maestro_temporarily_unavailable'),
+            'tokens_used' => 0,
+            'model_used' => 'error',
+        ];
     }
 }

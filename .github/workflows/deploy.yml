@@ -60,7 +60,7 @@ jobs:
           fi
 
           if [ "$PYTHON" = "true" ]; then
-            SCRIPT="$SCRIPT && cd $BASE && sudo supervisorctl restart bottega-fastapi"
+            SCRIPT="$SCRIPT && cd $BASE/python_ai_service && pip3 install -r requirements.txt --quiet && sudo supervisorctl restart bottega-fastapi"
           fi
 
           COMMAND_ID=$(aws ssm send-command \

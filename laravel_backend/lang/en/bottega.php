@@ -28,6 +28,8 @@ return [
 
     // ── MaestroDiBottegaService ────────────────────────────────────
     'maestro_not_connected' => '[Maestro not yet connected to Python AI service]',
+    'maestro_temporarily_unavailable' => 'The Maestro is temporarily unavailable. Please try again shortly.',
+    'maestro_empty_response' => 'The Maestro did not generate a response. Please try again.',
     'no_data_available' => 'No data available.',
     'context_artworks' => 'Artworks uploaded',
     'context_collections' => 'Collections',
