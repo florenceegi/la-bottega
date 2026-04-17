@@ -20,6 +20,11 @@ use Illuminate\Support\Facades\Route;
 | Public routes
 |--------------------------------------------------------------------------
 */
+
+// Health check readiness (deep) — no auth, no middleware (ALB + CI/CD gate)
+// Pattern B3: /health = nginx stub liveness, /api/health = Laravel readiness deep check
+Route::get('/health', \App\Http\Controllers\HealthController::class)->name('api.health');
+
 Route::get('/maestro/health', [MaestroController::class, 'health']);
 
 /*
