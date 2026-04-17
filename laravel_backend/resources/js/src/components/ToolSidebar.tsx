@@ -64,6 +64,7 @@ export function ToolSidebar({ expanded, onToggle, maestroDown, onToolOpen }: Pro
             if (!names.has('binocolo')) defaults.push({ tool_name: 'binocolo', last_used_at: '' });
             if (!names.has('market_pulse')) defaults.push({ tool_name: 'market_pulse', last_used_at: '' });
             if (!names.has('visibility_tracker')) defaults.push({ tool_name: 'visibility_tracker', last_used_at: '' });
+            if (!names.has('price_advisor')) defaults.push({ tool_name: 'price_advisor', last_used_at: '' });
             setTools([...unlocked, ...defaults]);
         });
     }, []);

@@ -340,6 +340,61 @@ export interface VisibilityReport {
     analyzed_at: string;
 }
 
+export interface PriceAdvisorItem {
+    egi_id: number;
+    title: string | null;
+    medium: string | null;
+    dimension_cm: string | number | null;
+    current_price: number | null;
+    suggested_price: number | null;
+    suggested_range: {
+        min: number | null;
+        max: number | null;
+    };
+    npe_confidence: number | null;
+    rule_floor_applied: boolean;
+    has_npe_data: boolean;
+}
+
+export interface PriceAdvisorIncoherence {
+    medium: string;
+    min_price: number;
+    max_price: number;
+    gap_pct: number;
+    items_count: number;
+    egi_ids: number[];
+}
+
+export interface PriceAdvisorEditionRange {
+    edition_size: number;
+    min_price: number;
+    max_price: number;
+}
+
+export interface PriceAdvisorEditionSuggestion {
+    egi_id: number;
+    title: string | null;
+    base_price: number;
+    ranges: PriceAdvisorEditionRange[];
+}
+
+export interface PriceAdvisorRules {
+    price_floor: string;
+    edition_ranges: string;
+    coherence: string;
+}
+
+export interface PriceAdvisorReport {
+    has_data: boolean;
+    analyzed_count: number;
+    items: PriceAdvisorItem[];
+    incoherences: PriceAdvisorIncoherence[];
+    edition_suggestions: PriceAdvisorEditionSuggestion[];
+    rules: PriceAdvisorRules;
+    error?: string;
+    analyzed_at: string;
+}
+
 export interface MicroscopioFixResult {
     fixed?: number;
     message?: string;
@@ -470,4 +525,10 @@ export const bottegaApi = {
     // Visibility Tracker (C.3)
     visibilityReport: (days = 7) =>
         request<{ data: VisibilityReport }>(`/tools/visibility/report?days=${days}`),
+
+    // Price Advisor (B.2)
+    priceAdvisorAnalyze: () =>
+        request<{ data: PriceAdvisorReport }>('/tools/price-advisor/analyze'),
+    priceAdvisorEgi: (egiId: number) =>
+        request<{ data: PriceAdvisorReport }>(`/tools/price-advisor/egi/${egiId}`),
 };

@@ -123,4 +123,10 @@ return [
     // ── VisibilityTrackerService ──────────────────────────────────
     'visibility_tracker_error' => 'Fehler bei der Visibility Tracker Analyse',
     'visibility_no_data' => 'Keine Ereignisse in diesem Zeitraum — teilen Sie Ihr Profil',
+
+    // ── BottegaPriceAdvisorService ────────────────────────────────
+    'price_advisor_error' => 'Fehler bei der Price Advisor Analyse',
+    'price_rule_floor' => 'Preise sinken nie. Wenn der Vorschlag niedriger ist als aktuell, bleibt der aktuelle Preis.',
+    'price_rule_editions' => 'Limitierte Editionen: Ed.10 = 30-40% Original, Ed.25 = 20-30%, Ed.50 = 15-20%.',
+    'price_rule_coherence' => 'Ähnliche Werke (gleiches Medium) mit Preisunterschied über 50% als inkohärent markiert.',
 ];
