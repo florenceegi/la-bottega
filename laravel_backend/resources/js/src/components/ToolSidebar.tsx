@@ -57,7 +57,13 @@ export function ToolSidebar({ expanded, onToggle, maestroDown, onToolOpen }: Pro
     const [tools, setTools] = useState<ToolExecution[]>([]);
 
     useEffect(() => {
-        bottegaApi.toolsUnlocked().then(setTools);
+        bottegaApi.toolsUnlocked().then((unlocked) => {
+            const names = new Set(unlocked.map(u => u.tool_name));
+            const defaults: ToolExecution[] = [];
+            if (!names.has('microscopio')) defaults.push({ tool_name: 'microscopio', last_used_at: '' });
+            if (!names.has('binocolo')) defaults.push({ tool_name: 'binocolo', last_used_at: '' });
+            setTools([...unlocked, ...defaults]);
+        });
     }, []);
 
     const hasTools = tools.length > 0;

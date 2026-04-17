@@ -100,4 +100,18 @@ return [
     'context_completeness' => 'Completude do perfil',
     'context_next_step' => 'Próximo passo',
     'no_data_available' => 'Sem dados disponíveis',
+
+    // ── BinocoloService ───────────────────────────────────────────
+    'binocolo_error' => 'Erro durante a análise Binocolo',
+    'binocolo_reason_medium_match' => 'Meio compatível com o teu',
+    'binocolo_reason_medium_any' => 'Aberto a todos os meios',
+    'binocolo_reason_career_match' => 'Nível de carreira compatível',
+    'binocolo_reason_career_open' => 'Aberto a qualquer nível de carreira',
+    'binocolo_reason_deadline_optimal' => 'Prazo ótimo para preparar a candidatura',
+    'binocolo_reason_deadline_close' => 'Prazo próximo — age já',
+    'binocolo_reason_deadline_far' => 'Prazo distante — planeia com calma',
+    'binocolo_reason_deadline_rolling' => 'Candidaturas sempre abertas',
+    'binocolo_reason_deadline_ok' => 'Prazo ao alcance',
+    'binocolo_reason_country_italy' => 'Oportunidade em Itália',
+    'binocolo_reason_country_international' => 'Oportunidade internacional',
 ];

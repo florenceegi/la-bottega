@@ -8,6 +8,7 @@
  * @purpose API routes La Bottega — Sanctum protected
  */
 
+use App\Http\Controllers\BinocoloController;
 use App\Http\Controllers\MaestroController;
 use App\Http\Controllers\MicroscopioController;
 use App\Http\Controllers\PercorsoController;
@@ -43,6 +44,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/tools/microscopio/fix/descriptions', [MicroscopioController::class, 'fixDescriptions']);
     Route::post('/tools/microscopio/fix/pricing', [MicroscopioController::class, 'fixPricing']);
     Route::post('/tools/microscopio/fix/coherence', [MicroscopioController::class, 'fixCoherence']);
+
+    Route::get('/tools/binocolo/match', [BinocoloController::class, 'match']);
 
     // --- Percorso ---
     Route::get('/percorso/status', [PercorsoController::class, 'status']);

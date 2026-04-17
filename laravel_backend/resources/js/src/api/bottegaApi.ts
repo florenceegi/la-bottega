@@ -226,6 +226,38 @@ export interface MicroscopioReport {
     analyzed_at: string;
 }
 
+export interface BinocoloOpportunity {
+    id: number;
+    title: string;
+    type: string;
+    deadline: string | null;
+    days_remaining: number | null;
+    url: string | null;
+    country: string | null;
+    mediums_accepted: string[] | null;
+    career_level_min: string | null;
+    career_level_max: string | null;
+    description: string | null;
+    source: string | null;
+    verified: boolean;
+}
+
+export interface BinocoloMatch {
+    opportunity: BinocoloOpportunity;
+    score: number;
+    match_reasons: string[];
+}
+
+export interface BinocoloReport {
+    career_level: 'emerging' | 'mid' | 'established';
+    medium_primary: string | null;
+    total_opportunities: number;
+    matched_count: number;
+    results: BinocoloMatch[];
+    error?: string;
+    analyzed_at: string;
+}
+
 export interface MicroscopioFixResult {
     fixed?: number;
     message?: string;
@@ -344,4 +376,8 @@ export const bottegaApi = {
             method: 'POST',
             body: JSON.stringify({ collection_id: collectionId }),
         }),
+
+    // Binocolo
+    binocoloMatch: (limit = 10) =>
+        request<{ data: BinocoloReport }>(`/tools/binocolo/match?limit=${limit}`),
 };
