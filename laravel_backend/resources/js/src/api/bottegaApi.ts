@@ -258,6 +258,47 @@ export interface BinocoloReport {
     analyzed_at: string;
 }
 
+export interface MarketTrendSignal {
+    id: number;
+    signal_key: string;
+    category: string;
+    medium: string | null;
+    career_level: string | null;
+    region: string | null;
+    direction: 'rising' | 'stable' | 'declining' | string;
+    magnitude: string | null;
+    insight: string;
+    actionable_advice: string | null;
+    source: string | null;
+    observed_from: string | null;
+    observed_to: string | null;
+}
+
+export interface MarketPulseSalesBreakdown {
+    medium: string;
+    count: number;
+    amount: number;
+    is_primary: boolean;
+}
+
+export interface MarketPulseSalesSummary {
+    has_data: boolean;
+    sales_count: number;
+    total_amount: number;
+    last_sale_at: string | null;
+    by_medium: MarketPulseSalesBreakdown[];
+}
+
+export interface MarketPulseReport {
+    medium_primary: string | null;
+    career_level: 'emerging' | 'mid' | 'established' | string;
+    signals_count: number;
+    signals: MarketTrendSignal[];
+    sales_summary: MarketPulseSalesSummary;
+    error?: string;
+    analyzed_at: string;
+}
+
 export interface MicroscopioFixResult {
     fixed?: number;
     message?: string;
@@ -380,4 +421,8 @@ export const bottegaApi = {
     // Binocolo
     binocoloMatch: (limit = 10) =>
         request<{ data: BinocoloReport }>(`/tools/binocolo/match?limit=${limit}`),
+
+    // Market Pulse (C.2)
+    marketPulse: () =>
+        request<{ data: MarketPulseReport }>('/tools/market-pulse/pulse'),
 };

@@ -114,4 +114,9 @@ return [
     'binocolo_reason_deadline_ok' => 'Échéance à portée',
     'binocolo_reason_country_italy' => 'Opportunité en Italie',
     'binocolo_reason_country_international' => 'Opportunité internationale',
+
+    // ── MarketPulseService ────────────────────────────────────────
+    'market_pulse_error' => 'Erreur lors de l\'analyse Market Pulse',
+    'market_pulse_no_signals' => 'Aucun signal de marché disponible pour le moment',
+    'market_pulse_no_sales' => 'Aucune vente enregistrée — première vente à venir',
 ];

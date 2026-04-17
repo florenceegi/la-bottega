@@ -14,6 +14,7 @@ import { PercorsoProgress } from '@/components/PercorsoProgress';
 import { OnboardingOverlay } from '@/components/OnboardingOverlay';
 import { MicroscopioReport } from '@/components/MicroscopioReport';
 import { BinocoloReport } from '@/components/BinocoloReport';
+import { MarketPulseReport } from '@/components/MarketPulseReport';
 import { usePercorso } from '@/hooks/usePercorso';
 import { useAuth } from '@/hooks/useAuth';
 import { useMaestroHealth } from '@/hooks/useMaestroHealth';
@@ -33,6 +34,7 @@ export function BottegaLayout() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [microscopioOpen, setMicroscopioOpen] = useState(false);
     const [binocoloOpen, setBinocoloOpen] = useState(false);
+    const [marketPulseOpen, setMarketPulseOpen] = useState(false);
 
     // Check if first visit (no percorso assigned)
     useEffect(() => {
@@ -69,6 +71,7 @@ export function BottegaLayout() {
                 onToolOpen={(name) => {
                     if (name === 'microscopio') setMicroscopioOpen(true);
                     if (name === 'binocolo') setBinocoloOpen(true);
+                    if (name === 'market_pulse') setMarketPulseOpen(true);
                 }}
             />
 
@@ -137,6 +140,9 @@ export function BottegaLayout() {
 
             {/* Binocolo Report overlay */}
             <BinocoloReport open={binocoloOpen} onClose={() => setBinocoloOpen(false)} />
+
+            {/* Market Pulse Report overlay */}
+            <MarketPulseReport open={marketPulseOpen} onClose={() => setMarketPulseOpen(false)} />
         </div>
     );
 }

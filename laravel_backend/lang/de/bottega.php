@@ -114,4 +114,9 @@ return [
     'binocolo_reason_deadline_ok' => 'Frist erreichbar',
     'binocolo_reason_country_italy' => 'Möglichkeit in Italien',
     'binocolo_reason_country_international' => 'Internationale Möglichkeit',
+
+    // ── MarketPulseService ────────────────────────────────────────
+    'market_pulse_error' => 'Fehler bei der Market Pulse Analyse',
+    'market_pulse_no_signals' => 'Derzeit keine Marktsignale verfügbar',
+    'market_pulse_no_sales' => 'Noch keine Verkäufe — erster Verkauf steht bevor',
 ];

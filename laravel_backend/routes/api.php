@@ -10,6 +10,7 @@
 
 use App\Http\Controllers\BinocoloController;
 use App\Http\Controllers\MaestroController;
+use App\Http\Controllers\MarketPulseController;
 use App\Http\Controllers\MicroscopioController;
 use App\Http\Controllers\PercorsoController;
 use Illuminate\Http\Request;
@@ -51,6 +52,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/tools/microscopio/fix/coherence', [MicroscopioController::class, 'fixCoherence']);
 
     Route::get('/tools/binocolo/match', [BinocoloController::class, 'match']);
+
+    Route::get('/tools/market-pulse/pulse', [MarketPulseController::class, 'pulse']);
 
     // --- Percorso ---
     Route::get('/percorso/status', [PercorsoController::class, 'status']);

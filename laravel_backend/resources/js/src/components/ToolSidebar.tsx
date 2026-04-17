@@ -62,6 +62,7 @@ export function ToolSidebar({ expanded, onToggle, maestroDown, onToolOpen }: Pro
             const defaults: ToolExecution[] = [];
             if (!names.has('microscopio')) defaults.push({ tool_name: 'microscopio', last_used_at: '' });
             if (!names.has('binocolo')) defaults.push({ tool_name: 'binocolo', last_used_at: '' });
+            if (!names.has('market_pulse')) defaults.push({ tool_name: 'market_pulse', last_used_at: '' });
             setTools([...unlocked, ...defaults]);
         });
     }, []);
