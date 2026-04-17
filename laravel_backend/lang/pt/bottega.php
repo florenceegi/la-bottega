@@ -119,4 +119,8 @@ return [
     'market_pulse_error' => 'Erro durante a análise Market Pulse',
     'market_pulse_no_signals' => 'Nenhum sinal de mercado disponível no momento',
     'market_pulse_no_sales' => 'Ainda sem vendas registadas — primeira venda a caminho',
+
+    // ── VisibilityTrackerService ──────────────────────────────────
+    'visibility_tracker_error' => 'Erro durante a análise Visibility Tracker',
+    'visibility_no_data' => 'Nenhum evento registado no período — comece a partilhar o seu perfil',
 ];

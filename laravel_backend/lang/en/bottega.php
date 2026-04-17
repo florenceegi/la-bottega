@@ -119,4 +119,8 @@ return [
     'market_pulse_error' => 'Error during Market Pulse analysis',
     'market_pulse_no_signals' => 'No market signals available at this time',
     'market_pulse_no_sales' => 'No sales recorded yet — first sale incoming',
+
+    // ── VisibilityTrackerService ──────────────────────────────────
+    'visibility_tracker_error' => 'Error during Visibility Tracker analysis',
+    'visibility_no_data' => 'No events recorded in this period — start sharing your profile',
 ];

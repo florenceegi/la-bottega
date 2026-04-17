@@ -299,6 +299,47 @@ export interface MarketPulseReport {
     analyzed_at: string;
 }
 
+export type VisibilityStage = 'awareness' | 'interest' | 'consideration' | 'conversion';
+
+export interface VisibilityFunnelStage {
+    stage: VisibilityStage | string;
+    count: number;
+    count_prior: number;
+    delta_pct: number | null;
+    event_types: string[];
+}
+
+export interface VisibilityEventCount {
+    event_type: string;
+    count: number;
+}
+
+export interface VisibilityReferrer {
+    referrer: string;
+    count: number;
+}
+
+export interface VisibilityCountry {
+    country: string;
+    count: number;
+}
+
+export interface VisibilityReport {
+    window_days: number;
+    period_from: string;
+    period_to: string;
+    total_events: number;
+    total_events_prior: number;
+    delta_pct: number | null;
+    has_data: boolean;
+    funnel: VisibilityFunnelStage[];
+    events_breakdown: VisibilityEventCount[];
+    top_referrers: VisibilityReferrer[];
+    top_countries: VisibilityCountry[];
+    error?: string;
+    analyzed_at: string;
+}
+
 export interface MicroscopioFixResult {
     fixed?: number;
     message?: string;
@@ -425,4 +466,8 @@ export const bottegaApi = {
     // Market Pulse (C.2)
     marketPulse: () =>
         request<{ data: MarketPulseReport }>('/tools/market-pulse/pulse'),
+
+    // Visibility Tracker (C.3)
+    visibilityReport: (days = 7) =>
+        request<{ data: VisibilityReport }>(`/tools/visibility/report?days=${days}`),
 };
