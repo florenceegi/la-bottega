@@ -17,6 +17,7 @@ import { BinocoloReport } from '@/components/BinocoloReport';
 import { MarketPulseReport } from '@/components/MarketPulseReport';
 import { VisibilityTrackerReport } from '@/components/VisibilityTrackerReport';
 import { PriceAdvisorPanel } from '@/components/PriceAdvisorPanel';
+import { SestanteReport } from '@/components/SestanteReport';
 import { usePercorso } from '@/hooks/usePercorso';
 import { useAuth } from '@/hooks/useAuth';
 import { useMaestroHealth } from '@/hooks/useMaestroHealth';
@@ -39,6 +40,7 @@ export function BottegaLayout() {
     const [marketPulseOpen, setMarketPulseOpen] = useState(false);
     const [visibilityOpen, setVisibilityOpen] = useState(false);
     const [priceAdvisorOpen, setPriceAdvisorOpen] = useState(false);
+    const [sestanteOpen, setSestanteOpen] = useState(false);
 
     // Check if first visit (no percorso assigned)
     useEffect(() => {
@@ -78,6 +80,7 @@ export function BottegaLayout() {
                     if (name === 'market_pulse') setMarketPulseOpen(true);
                     if (name === 'visibility_tracker') setVisibilityOpen(true);
                     if (name === 'price_advisor') setPriceAdvisorOpen(true);
+                    if (name === 'sestante') setSestanteOpen(true);
                 }}
             />
 
@@ -155,6 +158,9 @@ export function BottegaLayout() {
 
             {/* Price Advisor Panel overlay */}
             <PriceAdvisorPanel open={priceAdvisorOpen} onClose={() => setPriceAdvisorOpen(false)} />
+
+            {/* Sestante Report overlay */}
+            <SestanteReport open={sestanteOpen} onClose={() => setSestanteOpen(false)} />
         </div>
     );
 }

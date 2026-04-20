@@ -395,6 +395,50 @@ export interface PriceAdvisorReport {
     analyzed_at: string;
 }
 
+export type SestanteCareerLevel = 'emerging' | 'mid' | 'established' | string;
+
+export interface SestanteOwnStats {
+    egi_count: number;
+    avg_price: number | null;
+    min_price: number | null;
+    max_price: number | null;
+    sales_count_year: number;
+    profile_completeness: number;
+    medium: string | null;
+}
+
+export interface SestanteMetrics {
+    percentile_price: number | null;
+    percentile_visibility: number | null;
+    percentile_portfolio: number | null;
+    median_price_comparables: number | null;
+    median_sales_comparables: number | null;
+    median_egi_count_comparables: number | null;
+    price_gap_pct: number | null;
+}
+
+export interface SestanteComparable {
+    anonymous_label: string;
+    avg_price: number;
+    egi_count: number;
+    sales_count_year: number;
+    profile_completeness: number;
+    medium: string | null;
+    career_level: string | null;
+}
+
+export interface SestanteReport {
+    has_data: boolean;
+    medium_primary: string | null;
+    career_level: SestanteCareerLevel;
+    comparables_count: number;
+    own_stats: SestanteOwnStats;
+    metrics: SestanteMetrics;
+    top_comparables: SestanteComparable[];
+    error?: string;
+    analyzed_at: string;
+}
+
 export interface MicroscopioFixResult {
     fixed?: number;
     message?: string;
@@ -531,4 +575,8 @@ export const bottegaApi = {
         request<{ data: PriceAdvisorReport }>('/tools/price-advisor/analyze'),
     priceAdvisorEgi: (egiId: number) =>
         request<{ data: PriceAdvisorReport }>(`/tools/price-advisor/egi/${egiId}`),
+
+    // Sestante (B.3)
+    sestantePosition: () =>
+        request<{ data: SestanteReport }>('/tools/sestante/position'),
 };

@@ -129,4 +129,8 @@ return [
     'price_rule_floor' => 'Prices never drop. If the suggestion is lower than current, the current stays.',
     'price_rule_editions' => 'Limited editions: Ed.10 = 30-40% original, Ed.25 = 20-30%, Ed.50 = 15-20%.',
     'price_rule_coherence' => 'Similar artworks (same medium) with price gaps over 50% flagged as incoherent.',
+
+    // ── SestanteService ───────────────────────────────────────────
+    'sestante_error' => 'Error during Sestante analysis',
+    'sestante_no_comparables' => 'Few comparable artists on FlorenceEGI — at least 3 needed for positioning',
 ];

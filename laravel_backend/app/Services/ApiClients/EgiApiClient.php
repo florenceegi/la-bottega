@@ -85,4 +85,11 @@ class EgiApiClient extends BaseApiClient
     {
         return $this->get("/internal/bottega/user/{$userId}/sales", $filters);
     }
+
+    // --- Comparables (Sestante) ---
+
+    public function getComparableArtists(array $filters = []): ?array
+    {
+        return $this->get('/internal/bottega/comparables', $filters);
+    }
 }

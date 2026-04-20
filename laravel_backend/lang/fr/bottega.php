@@ -129,4 +129,8 @@ return [
     'price_rule_floor' => 'Les prix ne baissent jamais. Si la suggestion est inférieure à l\'actuel, l\'actuel reste.',
     'price_rule_editions' => 'Éditions limitées : Ed.10 = 30-40% original, Ed.25 = 20-30%, Ed.50 = 15-20%.',
     'price_rule_coherence' => 'Œuvres similaires (même medium) avec écart de prix supérieur à 50% signalées comme incohérentes.',
+
+    // ── SestanteService ───────────────────────────────────────────
+    'sestante_error' => 'Erreur lors de l\'analyse Sestante',
+    'sestante_no_comparables' => 'Trop peu d\'artistes comparables sur FlorenceEGI — au moins 3 nécessaires pour le positionnement',
 ];

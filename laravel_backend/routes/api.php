@@ -14,6 +14,7 @@ use App\Http\Controllers\MarketPulseController;
 use App\Http\Controllers\MicroscopioController;
 use App\Http\Controllers\PercorsoController;
 use App\Http\Controllers\PriceAdvisorController;
+use App\Http\Controllers\SestanteController;
 use App\Http\Controllers\VisibilityTrackerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -62,6 +63,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/tools/price-advisor/analyze', [PriceAdvisorController::class, 'analyze']);
     Route::get('/tools/price-advisor/egi/{egiId}', [PriceAdvisorController::class, 'analyzeEgi'])
         ->whereNumber('egiId');
+
+    Route::get('/tools/sestante/position', [SestanteController::class, 'position']);
 
     // --- Percorso ---
     Route::get('/percorso/status', [PercorsoController::class, 'status']);
