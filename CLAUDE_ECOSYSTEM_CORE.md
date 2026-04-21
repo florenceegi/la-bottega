@@ -152,6 +152,24 @@ CODICE LEGACY → Resta dove è. Si migra SOLO quando si tocca per altra ragione
 
 ---
 
+---
+
+## 🚫 Stack Bannati (M-094 · 2026-04-22)
+
+| Stack | Ambito ban | Eccezione |
+|-------|-----------|-----------|
+| **Alpine.js** | Tutti gli organi — codice nuovo | 🟡 Strategia Delta EGI legacy (art.florenceegi.com) |
+| **Livewire** | Tutti gli organi — codice nuovo | 🟡 Strategia Delta EGI legacy (art.florenceegi.com) |
+| **Filament** | Tutti gli organi — ban totale | Nessuna (admin v4 non girava, esperienza diretta Fabio) |
+
+**Alternative approvate**: Admin Laravel → Blade + Vanilla TS + Tailwind · SPA → React/Next 15 · Interattività leggera → Vanilla TS + Vite.
+
+**SSOT completo**: `EGI-DOC/docs/oracode/LEGACY_STACK_POLICY.md` (tabella 9 organi × 6 stack, pattern regex, cross-reference audit M-093 F-C2).
+
+**Enforcement**: hook PreToolUse `~/.claude/hooks/check-no-legacy-stack.sh` — blocca Write|Edit con `@livewire*`, `wire:*`, `x-data/show/on/…`, `Alpine.data/store/…`, `use Filament\`, `FilamentPanelProvider`, `->filament(` su file `.blade.php`/`.ts`/`.tsx`/`.vue`/`.php`. Eccezione automatica per file preesistenti in `/home/fabio/EGI/resources/views/` o `app/Livewire/`.
+
+**Bypass**: solo approvazione CEO via protocollo CEO-CTO + entry audit `EGI-DOC/docs/oracode/audit/bypass_log.md`.
+
 ## 🛑 Sistema Priorità P0–P3
 
 ```
